@@ -1,0 +1,38 @@
+//Time complexity: O(n.2^n) //n to explore each decision space, 2^n to explore each decision tree within the space( I think it will be less than 2^n)
+//Space complexity: O(n^2) //list of lists
+//Accepted in Leetcode: Yes
+
+//Approach:
+//1. Start with each element in candidates
+//2. Explore the path recursively(to check every combination), remove the comabination if at any point it exceeds the target value
+//3. If combination adds up to the target value, add it to the resulting list.
+
+//Choice: whether or not to include the element in candidate in the resulting combination
+//Constraints: making a choice at any particular stage should not be greater than the goal(ie target)
+//Goal: reach the target sum
+
+public class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    	  Arrays.sort(candidates); 
+        //Collections.reverse(Arrays.asList(candidates)); //wanted to check whether using array in descending order reduces time, it does not
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        getResult(result, new ArrayList<Integer>(), candidates, target, 0); //0 is the starting index of the array
+        
+        return result;
+    }
+    
+    private void getResult(List<List<Integer>> result, List<Integer> cur, int candidates[], int target, int start){
+    	if(target > 0){
+    		for(int i = start; i < candidates.length && target >= candidates[i]; i++)//build a node of the decision tree
+        {
+    			cur.add(candidates[i]);
+    			getResult(result, cur, candidates, target - candidates[i], i); //build decision tree for all possibilities of the above node and recurse
+    			cur.remove(cur.size() - 1); //remove node added, this happens when the node fails to be added to the list
+    		}//for
+    	}//if
+    	else if(target == 0 ) //combination found which adds up to the target
+      { 
+    		result.add(new ArrayList<Integer>(cur)); //add this combination to the list
+    	}//else if
+    }
+}
