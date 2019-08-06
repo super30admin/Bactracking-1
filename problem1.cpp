@@ -46,8 +46,8 @@ class Solution{
             {
                 combinations.push_back(candidates[i]);
                 backTrack(candidates, target - candidates[i], result, combinations, i);
-
                 combinations.pop_back();
+                i++;
             }
         }
 };
