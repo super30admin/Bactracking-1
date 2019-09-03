@@ -1,5 +1,5 @@
 class Solution:
-	# Time complexity : exponential but what is the exact value : n^k or k^n if so what is n and what is k?
+	# Time complexity : exponential O(4^n) where n is the number of digits and 4 is the choices(+,-,*,concat)
 	def addOperators(self, num: str, target: int) -> List[str]:
 		res = []
 		if len(num) == 0:

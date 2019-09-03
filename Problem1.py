@@ -1,5 +1,5 @@
 class Solution:
-	# Time complexity : exponential but what is the exact value : n^k or k^n if so what is n and what is k?
+	# Time complexity : exponential, O(2^n)
 	def combinationSum(self, candidates, target):
 		if len(candidates) == 0:
 			return []
