@@ -37,7 +37,7 @@ public class ExpressionAddOperators {
             		//Considering abs value for tail in case of +, -
                 helper(result, path + '+' + cur, num, target, i + 1,calculated + cur, cur); 
                 helper(result, path + '-' + cur, num, target,i + 1, calculated - cur, -cur); 
-                helper(result, path + '*' + cur, num, target,i + 1, calculated - tail + tail * cur, tail* cur); //backtracking the prev operator
+                helper(result, path + '*' + cur, num, target,i + 1, calculated - tail + tail * cur, tail* cur); //Handling operator precedence in case of *
             }
 		}
 	}
