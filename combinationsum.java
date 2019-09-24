@@ -1,5 +1,5 @@
-//Time Complexity: O(N log N)
-//Space Complexity: O(N)
+//Time complexity: O(n.2^n) //n to explore each decision space, 2^n to explore each decision tree within the space (I guess?)
+//Space Complexity: O(n^2) => O(N)
 //Tried on leetcode:accepted after 4 attempts 
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) 
