@@ -1,12 +1,12 @@
 /*
 Author: Akhilesh Borgaonkar
 Problem: find all unique combinations in candidates where the candidate numbers sums to target
-Approach: Used DFS approach here. Start with first candidate and find the difference between the candidate and target sum. If the difference is 0 then, add the
+Approach: Used backtracking approach here. Start with first candidate and find the difference between the candidate and target sum. If the difference is 0 then, add the
     candidate to result list. If the difference is negative then, ignore the current candidate. If the difference is positive then, call the function recursively 
     on the subset of candidates starting from current to last.
-Time Complexity: O(n) (I am not sure here coz the recursive function is called on every candidate with a combination of remaining candidates. So, it might be O(n^2))
+Time Complexity: O(n^n)
 Space complexity: O(n)
-LC verified. 
+LC verified.
 */
 
 
