@@ -1,0 +1,43 @@
+/*
+Time Complexity: (2^n)
+
+Space Complexity: (2^n)
+
+Approach:
+
+recursively either choose or dont choose an element to get to the sum.
+*/
+
+class Solution {
+    
+    List<List<Integer>> result;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        
+        result= new ArrayList<>();
+        int sum=0;
+        backTrack(candidates,new ArrayList<>(),target,sum,0);
+        return result;
+    }
+    
+void backTrack(int [] candidates,ArrayList<Integer> arl, int target,int sum, int i)
+    {
+    
+            // edge case
+            if(i>=candidates.length) return;
+            sum+=candidates[i];
+            arl.add(candidates[i]);
+            
+            if(sum==target) result.add(new ArrayList<>(arl));
+
+            //choose
+            if(sum<target) backTrack(candidates,new ArrayList<Integer>(arl),target,sum,i);
+
+            // dont choose
+            sum=sum-candidates[i];
+            arl.remove(arl.size()-1);
+
+            if(sum<target) backTrack(candidates,new ArrayList<Integer>(arl),target,sum,i+1);
+    
+        return;
+    }
+}
