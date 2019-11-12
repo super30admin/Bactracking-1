@@ -23,7 +23,6 @@ class Solution(object):
             #base case
             if target==0:
                 res.append(curr_list)
-                return res
             if target<0:
                 curr_list.pop()
         
@@ -31,6 +30,5 @@ class Solution(object):
             size=len(candidates)
             for i in range(size):
                 if candidates[i]<=target:
-                    self.backtrack(candidates[i:],target-candidates[i],curr_list+[candidates[i]],res,i)
-                
+                    self.backtrack(candidates[i:],target-candidates[i],curr_list+ [candidates[i]],res,index)
             return res
