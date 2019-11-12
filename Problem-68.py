@@ -34,3 +34,40 @@ class Solution(object):
                     self.backtrack(candidates[i:],target-candidates[i],curr_list+[candidates[i]],res,i)
                 
             return res
+        
+        
+    class Solution(object):
+    def combinationSum(self, candidates, target):
+        
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        res=[]
+        path=[]
+        index=0
+        if len(candidates)==0: return []
+        self.backtrack(candidates,target,res,path,index)
+        return res
+        
+    
+    def backtrack(self,candidates,target,res,path,index):
+        
+            #base case
+            if target==0:
+                res.append(path[:])
+                return res
+            if target<0: return
+        
+            #logic
+            for i in range(index,len(candidates)):
+                if candidates[i]<=target:
+                    path.append(candidates[i])
+                    print("before",path)
+                    self.backtrack(candidates,target-candidates[i],res,path,i)
+                    path.pop()
+                    print("after",path)
+        
+            
+            
