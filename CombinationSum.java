@@ -5,7 +5,7 @@
 
 
 // Your code here along with comments explaining your approach
-class Solution {
+class CombinationSum {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> result = new ArrayList<>();
         if(null == candidates || 0 == candidates.length){return result;}
