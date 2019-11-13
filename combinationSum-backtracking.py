@@ -14,7 +14,7 @@ class Solution(object):
         """
         candidates.sort()
         temp = []
-        #index = 0
+        #Edge case
         if len(candidates) == 0:
             return res
         
@@ -22,8 +22,10 @@ class Solution(object):
         return self.res
         
     def backtrack(self,candidates,target,temp,index):
+		#Boundary condition
         if index >= len(candidates) or target < 0:
             return
+		#Base case
         if target == 0:
             self.res.append(temp[:])
             return
