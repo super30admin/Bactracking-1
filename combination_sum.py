@@ -1,6 +1,6 @@
 # Runs on Leetcode
-    # runtime complexity - O()
-    # Memory complexity - O(1)
+    # Runtime complexity - exponential, I am not sure what it is exactly
+    # Memory complexity - O(1) without the recursive stack
 
 
 class Solution:
