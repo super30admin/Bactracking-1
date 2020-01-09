@@ -1,4 +1,4 @@
-// Time Complexity - Exponential (n^n)
+// Time Complexity - Exponential (n^n) where n is the number of elements in the candidates array
 // Space Complexity - O(1)
 // This solution worked on LeetCode
 
