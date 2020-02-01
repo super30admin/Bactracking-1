@@ -6,6 +6,7 @@ class Solution:
         """
             https://leetcode.com/problems/expression-add-operators/
             // Time Complexity : Exponential O(n*4n)
+                    'n' is the number of numbers in the string num.
             // Space Complexity : O(n)
             // Three line explanation of solution in plain english:
                When we use dfs to do this question, the most tricky part is that how to deal with multiplication.
