@@ -1,0 +1,37 @@
+//Time: exponential
+//space: height of the tree space in recursive stack
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> result=new ArrayList<List<Integer>>();
+        if(candidates==null || candidates.length==0) return result;
+        dfs(candidates,result, new ArrayList<Integer>(),target , 0);
+        return result;
+    }
+    //backtracking function
+    void dfs(int[] candidates, List<List<Integer>> result, List<Integer> list, int target, int startIndex)
+    {
+        //base
+            if(target==0)
+            {
+               result.add(new ArrayList<>(list));
+                return;
+            }
+        //condition to return from recursion if sum is grtr than target 
+            if(target<0)
+               return; 
+        
+        //logic
+        //iterate for all the combinations, here startindex gets changed everytime so dont start with i=0
+        for(int i=startIndex;i<candidates.length;i++)
+        {
+            //add that index combination
+            //or you can add this condition here, you ll save some combinations
+            // if(target<0)
+            //     break; 
+            list.add(candidates[i]);
+            dfs(candidates, result, list,target-candidates[i], i);
+            //once complete dfs, remove using backtrack
+            list.remove(list.size()-1);
+        }
+    }
+}
