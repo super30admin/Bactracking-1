@@ -1,5 +1,5 @@
 /*
-Time: O(2^N) and space: O(2^N)
+Time: O(2^N) and space: O(N)
 
 Algorithm:
 =========
