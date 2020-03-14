@@ -1,0 +1,46 @@
+//time: O(4^n) where n is length of num string , we have 4 choices ie exponential time complexity
+//space: maximum depth of stack : O(n)
+class Solution {
+    public List<String> addOperators(String num, int target) {
+        List<String> solution=new ArrayList<>();
+        backtrack(solution,num,target,0,"",0,0);
+        return solution;
+    }
+    
+    
+    private void backtrack(List<String> solution, String num, int target, int index, String expression, long value, long prevSignedOp )
+    {
+        //is Goal? : recah end to string and found target
+        if(index==num.length())
+        {
+            if(target==value)
+            {
+                solution.add(expression);
+            }
+            //return even if you reach the end of string
+            return;
+        }
+        
+        
+        for(int cursor=index;cursor<num.length();cursor++)
+        {
+            //case 105,5 : ["1*0+5","1*5","10-5"]
+            //cursor shudnt be at starting index which has 0 and index is having 0 so preceeding 0 case shud be skipped
+            if(cursor!=index && num.charAt(index)=='0') break;
+            Long operand = Long.parseLong(num.substring(index,cursor+1));
+            //before you have first operator, you shud have atleast a digit to processed by operator so handle index 0 case
+            if(index==0)
+            {
+                //expression is : "1" , value is last value calculated so operand and prev signed operand is also a operand
+                //we dont have operator at this point(for first index) so prepare this thing and later on work with operators
+                backtrack(solution,num,target,cursor+1,""+operand,operand,operand);
+            }
+            else
+            {
+                backtrack(solution,num,target,cursor+1,expression+"+"+operand,value+operand,operand);
+                backtrack(solution,num,target,cursor+1,expression+"-"+operand,value-operand,-1*operand);
+                backtrack(solution,num,target,cursor+1,expression+"*"+operand,value-prevSignedOp + operand*prevSignedOp, operand*prevSignedOp);
+            }
+        }
+    }
+}
