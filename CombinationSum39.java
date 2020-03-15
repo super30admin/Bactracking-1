@@ -1,6 +1,9 @@
 import java.util.LinkedList;
 import java.util.List;
-
+//time complexity : N! ..seem to be worst case
+//space complexity : N total elements
+//leet code : yes
+//steps : used backtracking
 class CombinationSum39 {
 
 
