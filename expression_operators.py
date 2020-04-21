@@ -13,6 +13,8 @@ checking the evaluated output with the target at each step
 class Solution:
     def addOperators(self, num: str, target: int) -> List[str]:
         """
+        Idea is to get the all possible combinations of the number and probably simultaneously check the current score with the target, or else backtrack to use other operator or even other operands
+        1. Break the string into n possible operands and run a recursive algo wch allows to branch into all possible operators and checking the evaluated output with the target at each step 
         """
         operands = []
         result = []
@@ -30,12 +32,14 @@ class Solution:
                     result.pop()
         
         def expression_rec(operands,i,eval_value,prev_value,prev_string,target,n):
+            # if eval_value == target:
+            #     final_operands.append(expression[::])
             #base case
             if eval_value and eval_value > target:
                 return
             if i == n:
                 if eval_value == target:
-                    final_operands.append(expression[::])
+                    final_operands.append(prev_string)
                 return
             
             #call the recursive functions for all three operators
@@ -59,6 +63,6 @@ class Solution:
         operands_rec(num,0,len(num))
         print(operands)
         for op in operands:
-            expression_rec(op,1,None,op[0],"",target,len(op))
+            expression_rec(op,1,None,op[0],str(op[0]),target,len(op))
         
         return final_operands
