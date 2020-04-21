@@ -1,5 +1,5 @@
 """
-// Time Complexity : O(n2)
+// Time Complexity : O(n*4^n)
 // Space Complexity : O(n)
 // Did this code successfully run on Leetcode : No
 // Any problem you faced while coding this : In the final stage of creating the result string
@@ -10,63 +10,65 @@ Algorithm explanation
 2. Run a recursive algo wch allows to branch into all possible operators and 
 checking the evaluated output with the target at each step 
 
-Problems
-- For the test case [2,3,2], it's not considering the other path(REally thought it would)
-- Handling 0 in the middle
-
-
+Configuration - prev_string, calc_value - value till now, 
+tail_value - addon part in previous computation
+1. Base case - End of the string and cal value matching the target, append the string to result
+2. Iterate over the string till the end
+    if the index is 0,we add no op and just move ahead in the string with prev strn, curr val and tail valu to be set for futher action
+    Update the eval_string for respective operator from +,-,* 
+    For + and -, we compute the eval value and tail value normally
+    For nultiplication, we leverage the tail value to compute the current 
+    eval value
+    recurse for all 3 operator
 """
 class Solution:
     def addOperators(self, num: str, target: int) -> List[str]:
-        """
-        Idea is to get the all possible combinations of the number and probably simultaneously check the current score with the target, or else backtrack to use other operator or even other operands
-        1. Break the string into n possible operands and run a recursive algo wch allows to branch into all possible operators and checking the evaluated output with the target at each step 
-        """
-        operands = []
-        result = []
-        def operands_rec(num,pos,n):
-            if n == pos:
-                operands.append(result[::])
-                return
-            
-            for i in range(pos,n):
-                #check if result needs to be updated
-                substr = num[pos:i+1]
-                if substr and len(substr) < n:
-                    result.append(int(substr))
-                    operands_rec(num,i+1,n)
-                    result.pop()
-        
-        self.result_string = ""
-        def expression_rec(operands,i,eval_value,prev_string,target,n):
+        def helper(num,target,prev_string,calc_value,tail_value,index):
             #base case
-            if eval_value and eval_value > target:
-                return
-            if i == n:
-                if eval_value == target:
-                    final_operands.append(prev_string)
+            if index == len(num):
+                if calc_value == target:
+                    results.append(prev_string)
                 return
             
-            #call the recursive functions for all three operators
-            for op in ['+','-','*']:
-                if op == '+':
-                    #eval_value = operands[i-1] + operands[i]
-                    eval_value = eval_value + operands[i]
-                elif op == '-':
-                    #eval_value = operands[i-1] - operands[i]
-                    eval_value = eval_value - operands[i]
-                elif op == '*':
-                    #eval_value = operands[i-1] * operands[i]
-                    eval_value = eval_value * operands[i]
-                self.result_string = prev_string + op + str(operands[i])
-                expression_rec(operands,i+1,eval_value,self.result_string,target,n)
-                self.result_string = prev_string
+            #logic
+            for i in range(index,len(num)):
+                #handling middle 0 in the number eg 105
+                if index!=i and num[index] == '0':
+                    break
+                curr = int(num[index:i+1])
+                eval_string = ""
+                if index == 0: # don't choose any op
+                    #action
+                    eval_string = prev_string + str(curr)
+                    #recurse
+                    helper(num,target, eval_string,curr,curr,i+1)
+                    #backtrack
+                    eval_string = prev_string
+                else:
+                    #check for all 3 operators with * having precedence
+                    tail = 0
+                    for op in ['+','-','*']:
+                        if op == '+':
+                            #eval_value = operands[i-1] + operands[i]
+                            eval_value = calc_value + curr
+                            tail = curr
+                        elif op == '-':
+                            #eval_value = operands[i-1] - operands[i]
+                            eval_value = calc_value - curr
+                            tail = -curr
+                        elif op == '*':
+                            eval_value = calc_value - tail_value + tail_value*curr
+                            #eval_value = operands[i-1] * operands[i]
+                            tail = tail_value * curr
+                        
+                        #action
+                        eval_string = prev_string + op + str(curr)
+                        #recurse
+                        helper(num,target, eval_string,eval_value,tail,i+1)
+                        
+                        #backtrack
+                        eval_string = prev_string
         
-        final_operands = []
-        expression = []
-        operands_rec(num,0,len(num))
-        print(operands)
-        for op in operands:
-            expression_rec(op,1,op[0],str(op[0]),target,len(op))
-        
-        return final_operands
+        results = []
+        helper(num,target,"",0,0,0)
+        return results
