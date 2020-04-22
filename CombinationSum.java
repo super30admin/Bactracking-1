@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-// Time Complexity : O(2^n)
+// Time Complexity : O(target x 2^n)
 // Space Complexity :O(n)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
