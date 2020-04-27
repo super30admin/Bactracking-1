@@ -1,5 +1,5 @@
-// Time Complexity :
-// Space Complexity :
+// Time Complexity : O((n^2) *(2^n))
+// Space Complexity : O(n)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
 
@@ -8,7 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CombinationSumI {
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    // Set
+    public List<List<Integer>> combinationSumWithSet(int[] candidates, int target) {
         List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(candidates);
         int remaining = target;
@@ -30,4 +31,39 @@ public class CombinationSumI {
             }
         }
     }
+
+        // Backtracking
+
+        public List<List<Integer>> combinationSum(int[] candidates, int target) {
+            List<List<Integer>> result = new ArrayList<>();
+            if(candidates == null|| candidates.length == 0){
+                return result;
+            }
+            backtrack(result,target,candidates,0, new ArrayList<>(),0);
+            return result;
+        }
+
+        public void backtrack(List<List<Integer>> result, int target, int[] candidates, int sum, List<Integer> temp, int index){
+            // Base Case
+            if(sum == target){
+                result.add(new ArrayList<>(temp));
+                return;
+            }
+
+            // Termination Case
+            if(sum > target){
+                return;
+            }
+            // Logic
+
+            for(int i = index; i < candidates.length; i++){
+                if(sum + candidates[i] > target){
+                    continue;
+                }
+                temp.add(candidates[i]);
+                backtrack(result,target,candidates, sum + candidates[i], temp, i);
+                temp.remove(temp.size() - 1);
+            }
+
+        }
 }
