@@ -1,6 +1,6 @@
 #Problem 1: Combination Sum
-#Time Complexity: O(n)
-#Space complexity: O(h) , size of the memory array
+#Time Complexity: O(2^n)
+#Space complexity: O(h) , size of the memory array 
 #Worked on leetcode? Yes
 
 '''
