@@ -1,0 +1,43 @@
+// Time Complexity :O(n*4)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :Yes
+
+
+class Solution {
+    var res = [String]()
+    func addOperators(_ num: String, _ target: Int) -> [String] {
+        guard num.count != 0 else { return [] }
+        search(num, num.startIndex, "", target, 0, 0)
+        return res
+    }
+    
+    func search(_ num: String, _ start: String.Index, _ path: String, _ target: Int, _ sum: Int, _ last: Int) {
+        
+        if start == num.endIndex {
+            if target == sum {
+                res.append(path)
+            }
+            return
+        }
+        
+        var index = start
+        while index < num.endIndex {
+            let x = Int(String(num[start...index]))!
+            
+            if start == num.startIndex {
+                search(num, num.index(after: index), String(x), target, x, x)
+            }
+            else {
+                search(num, num.index(after: index), path + "*" + String(x), target, sum - last + last * x, last * x)
+                search(num, num.index(after: index), path + "+" + String(x), target, sum + x, x)
+                search(num, num.index(after: index), path + "-" + String(x), target, sum - x, -x)
+            }
+            
+            if x == 0 {
+                break
+            }
+            
+            index = num.index(after: index)
+        }
+    }
+}
