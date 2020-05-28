@@ -1,0 +1,33 @@
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+           List<List<Integer>> res = new ArrayList<>();
+        
+           /* edge case */
+           if(candidates == null || candidates.length == 0)
+               return res;
+        
+           backtrack(res,new ArrayList<>(),candidates, target, 0);
+           return res;
+    }
+    private void backtrack(List<List<Integer>> res, List<Integer> temp, int[] candidates,int target, int start){
+        // base case
+        if(target < 0 ) 
+            return ;
+        // target achieved
+        if(target == 0) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        else{
+            
+            for(int i = start; i< candidates.length;i++){
+                // action
+                temp.add(candidates[i]);     
+                // recurse , same value can be added so start can be same i
+                backtrack(res,temp,candidates, target- candidates[i], i);
+                // reverse back the action
+                temp.remove(temp.size()-1);
+            }
+        }
+    }
+}
