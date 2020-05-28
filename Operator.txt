@@ -1,0 +1,37 @@
+class Solution {
+   public List<String> addOperators(String num, int target) {
+        List<String> rst = new ArrayList<String>();
+       /* edge case */ 
+       if(num == null || num.length() == 0) 
+           return rst;
+        // back track function
+        helper(rst, "", num, target, 0, 0, 0);
+        return rst; // return result
+    }
+    private void helper(List<String> rst, String path, String num, int target, int pos, long eval, long multed){
+        // reached the end of string
+        if(pos == num.length()){
+            // if the target string as the eval string then add it to result
+            if(target == eval)
+                rst.add(path);
+            return;
+        }
+        for(int i = pos; i < num.length(); i++){
+            // handle post 0 case
+            if(i != pos && num.charAt(pos) == '0') break;
+            // current string, this takes 1 charcater at time, then2 and so 
+            long cur = Long.parseLong(num.substring(pos, i + 1));
+            if(i == 0){
+                helper(rst, path + cur, num, target, i + 1, cur, cur); // if i == 0 then return by default its normal string
+            }
+            else{
+                // 3 recursive function for add subtract and multiply
+                helper(rst, path + "+" + cur, num, target, i + 1, eval + cur , cur);
+                
+                helper(rst, path + "-" + cur, num, target, i + 1, eval -cur, -cur);
+                
+                helper(rst, path + "*" + cur, num, target, i + 1, eval - multed + multed * cur, multed * cur );
+            }
+        }
+    }
+}
