@@ -37,10 +37,9 @@ class Solution(object):
         
         def backtrack(nums,temp,index):
             result.append(temp[:])
-            while(index < len(nums)):
+            for index in range(index,len(nums)):
                 temp.append(nums[index])
                 (backtrack(nums,temp,index+1))
-                index+=1
                 temp.pop()
                 
                 
