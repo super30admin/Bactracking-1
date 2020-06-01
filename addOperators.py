@@ -1,5 +1,5 @@
-# Time complexity: O(3^N)
-# Space complexity: O(3^N)
+# Time complexity: O(4^N)
+# Space complexity: O(4^N)
 # Did this code successfully run on Leetcode : Yes
 # Any problem you faced while coding this : No
 
