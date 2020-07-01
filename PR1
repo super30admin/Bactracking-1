@@ -1,0 +1,71 @@
+// Time Complexity : O(2^n)- where n is the number of candidates.
+// Space Complexity : O(n)- we use the same array list but we keep modifying it. If we find a solution that matches the target, we add a copy of the array list to the result.
+// Did this code successfully run on Leetcode : Yes.
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach: Backtracking approach.
+
+
+class Solution {
+    List<List<Integer>> result;
+    int tar;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result=new ArrayList<>();
+        tar=target; 
+        backtrack(candidates,new ArrayList<>(),0,0);
+        return result;
+    }
+    private void backtrack(int[] candidates,List<Integer> temp,int sum,int index){
+        //base
+        if(sum==tar) result.add(new ArrayList<>(temp));
+        if(sum>tar) return;
+        //logic
+        for(int i=index;i<candidates.length;i++){
+           //action
+            temp.add(candidates[i]);
+           //recurse
+backtrack(candidates,temp,sum+candidates[i],i);
+            //bactrack
+             temp.remove(temp.size()-1);
+        }
+    }
+}
+
+
+// Time Complexity : O(2^n)- where n is the number of candidates.
+// Space Complexity : O(n*n)- can exceed this in the worst case. (Because each candidate can be used infinite number of times.)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach: Recursive approach, new array list at every possibility. Costly in terms of space.
+
+
+
+class Solution {
+    List<List<Integer>> result;
+    int tar;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result=new ArrayList<>();
+        tar=target; 
+        helper(candidates,new ArrayList<>(),0,0);
+        return result;
+    }
+    private void helper(int[] candidates,List<Integer> temp,int sum,int index){
+        //base
+        if(index>=candidates.length) return;
+         if(sum==tar) 
+         {
+             result.add(temp);
+             return;
+         }
+        if(sum>tar) return;
+        //logic
+        //don't choose
+        helper(candidates,new ArrayList<>(temp),sum,index+1);
+        //choose
+        temp.add(candidates[index]);
+        helper(candidates,new ArrayList<>(temp),sum+candidates[index],index);
+        }
+    }
