@@ -31,7 +31,7 @@
 
 # class Solution2:
 #     result = None 
-#     #  Time = O(n^2) | space = O(n)
+#     #  Time = O(2^n) | space = O(n)
 #     def combinationSum(self, candidates, target):
 #         self.result = []
 #         if not candidates or len(candidates) == 0:
