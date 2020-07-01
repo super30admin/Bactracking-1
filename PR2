@@ -1,0 +1,105 @@
+// Time Complexity : O(4^n) - the have 4 options for each number. Where n is the length of the string.
+// Space Complexity : O(n*4^n) - in this recursive approach we create a new string at every level
+// Did this code successfully run on Leetcode : Yes.
+// Any problem you faced while coding this : No
+
+// Your code here along with comments explaining your approach : My approach is a recursive approach. In which we create all the possibilities at each level. The tail is used to keep a track of the previous and in special cases like multiplication based on the precedence rule of BODMAS to handle the '*' case. Whenever we reach the end of the length of the string we add the resultant string to the final result if the sum is equal to the target.
+
+class Solution {
+    List<String> result;
+    int tar;
+    public List<String> addOperators(String num, int target) {
+       result=new ArrayList<String>();
+        tar=target;
+        if(num==null || num.length()==0) return result;
+        helper(num,"",0,0,0);
+        return result;
+    }
+    private void helper(String num,String path,long cal,long tail,int index){
+        //base case 
+        if(index==num.length()){
+            if(cal==tar){
+                result.add(path);
+            }
+            return;
+        }
+        //logic
+        for(int i=index;i<num.length();i++){
+            //preceding zero
+            if(i!=index && num.charAt(index)=='0') break;
+            long curr=Long.parseLong(num.substring(index,i+1)); 
+            if(index==0){
+                helper(num,path+curr,curr,curr,i+1);
+            }
+            else{
+                //choose +
+                helper(num,path+"+"+curr,cal+curr,curr,i+1);
+                //choose -
+                helper(num,path+"-"+curr,cal-curr,-curr,i+1);
+                //choose *
+                helper(num,path+"*"+curr,cal-tail+tail*curr,tail*curr,i+1);
+            }
+             
+        }
+    }
+}
+// Time Complexity : O(4^n) - the have 4 options for each number. Where n is the length of the string.
+// Space Complexity : O(n) - in this backtracking approach, we use string builder.
+// Did this code successfully run on Leetcode : Yes.
+// Any problem you faced while coding this : No
+
+// Your code here along with comments explaining your approach : My approach is a backpacking approach approach. In which we create all the possibilities at each level and once we call the recurse function, we bactrack or we revert the sb at every level. The tail is used to keep a track of the previous and in special cases like multiplication based on the precedence rule of BODMAS to handle the '*' case. Whenever we reach the end of the length of the string we add the resultant stringbuilder by converting it into a string to the final result if the sum is equal to the target.
+
+
+
+
+class Solution {
+    List<String> result;
+    int tar;
+    public List<String> addOperators(String num, int target) {
+       result=new ArrayList<String>();
+        tar=target;
+        if(num==null || num.length()==0) return result;
+        helper(num,new StringBuilder(),0,0,0);
+        return result;
+    }
+    private void helper(String num,StringBuilder path,long cal,long tail,int index){
+        //base case 
+        if(index==num.length()){
+            if(cal==tar){
+                result.add(path.toString());
+            }
+            return;
+        }
+        //logic
+        for(int i=index;i<num.length();i++){
+            //preceding zero
+            if(i!=index && num.charAt(index)=='0') break;
+            long curr=Long.parseLong(num.substring(index,i+1)); 
+            int len=path.toString().length();
+            if(index==0){
+                path.append(curr);
+                helper(num,path,curr,curr,i+1);
+                path.setLength(len);
+            }
+            else{
+                //choose +
+                path.append("+");
+                path.append(curr);
+                helper(num,path,cal+curr,curr,i+1);
+                path.setLength(len);
+                //choose -
+                path.append("-");
+                path.append(curr);
+                helper(num,path,cal-curr,-curr,i+1);
+                path.setLength(len);
+                //choose *
+                path.append("*");
+                path.append(curr);
+                helper(num,path,cal-tail+tail*curr,tail*curr,i+1);
+                path.setLength(len);
+            }
+             
+        }
+    }
+}
