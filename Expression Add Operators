@@ -1,0 +1,56 @@
+// Time Complexity : O(2^n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this :No
+
+// Approach
+//1) Iterate through the expression till we are not at the end of the string
+//2) If we are at the end of string, check whether the given expression is equal to the target or not
+//3) Else try the same thing by having no operator , * operator , + operator and - operator and then backtrack again
+
+class Solution {
+    List<String> result;
+    int targ;
+    public List<String> addOperators(String num, int target) {
+        result = new ArrayList<>();
+        targ = target;
+        if(num == null || num.length() == 0)return result;
+        helper(num,target,new StringBuilder(),0,0,0);
+        return result;
+    }
+    private void helper(String num, int target, StringBuilder sb, long calc, long tail,int index){
+        //base
+        if(index == num.length()){
+            if(calc == target){
+                result.add(sb.toString());
+                return;
+            }
+        }
+        //logic
+        for(int i=index;i<num.length();i++){
+            if(index != i && num.charAt(index) == '0')break;
+            long curr = Long.parseLong(num.substring(index, i+1));
+            int len = sb.toString().length();
+            if(index == 0){
+                sb.append(curr);
+                helper(num,target,sb,curr,curr,i+1);
+                sb.setLength(len);
+            }else{
+                sb.append('+');
+                sb.append(curr);
+                helper(num,target,sb,calc+curr,curr,i+1);
+                sb.setLength(len);
+                
+                sb.append('-');
+                sb.append(curr);
+                helper(num,target,sb,calc-curr,-curr,i+1);
+                sb.setLength(len);
+                
+                sb.append('*');
+                sb.append(curr);
+                helper(num,target,sb,calc-tail +tail*curr,tail*curr,i+1);
+                sb.setLength(len);
+            }
+        }
+    }
+}

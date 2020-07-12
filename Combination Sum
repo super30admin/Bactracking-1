@@ -1,0 +1,36 @@
+// Time Complexity : O(n *2^n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+//Approach:
+//1) Iterate over the given array till the remaining target is not less than 0
+//2) If target equals to 0 then we found the target sum and add to result
+//3) Then backtrack to find all the possible combinations such that they sum to the target or not.
+
+class Solution {
+    List<List<Integer>> result;
+    int targ;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result = new ArrayList<>();
+        targ = target;
+        backtrack(candidates, new ArrayList<>(),0, 0);
+        return result;
+    }
+    private void backtrack(int[] candidates, List<Integer> temp,int sum, int index){
+        if(sum >targ)return;
+        if(sum == targ){
+            result.add(new ArrayList<>(temp));
+            return;
+        }
+        for(int i=index;i<candidates.length;i++){
+            //action
+            temp.add(candidates[i]);
+            //recurse
+            backtrack(candidates,temp,sum+candidates[i],i);
+            //backtrack
+            temp.remove(temp.size()-1);
+        }
+    }
+}
