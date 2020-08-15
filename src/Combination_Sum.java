@@ -17,7 +17,7 @@ public class Combination_Sum {
 		//edge case
 		if(candidates == null || candidates.length == 0)
 			return result;
-
+		/*Arrays.sort(candidates);	Each number in candidates may only be used once in the combination*/	
 		backtrack(candidates, new ArrayList<>(), 0, 0);	//calling function on the given array, using a temp list, sum and index to track the candidates array
 		return result;
 	}
@@ -34,6 +34,8 @@ public class Combination_Sum {
 
 		//logic
 		for(int i=index; i<candidates.length; i++){
+			/*if(i > index && candidates[i] == candidates[i-1])
+                continue;	Each number in candidates may only be used once in the combination */
 			//action
 			temp.add(candidates[i]);
 
