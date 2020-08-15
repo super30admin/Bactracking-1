@@ -5,6 +5,9 @@ import java.util.*;
 //Did this code successfully run on Leetcode : Yes
 //Any problem you faced while coding this : No
 
+/* Using Backtracking, Since repeated numbers are allowed, add a number into list and keep adding until the sum is greater than equal to target value
+ * Then backtrack(remove the numbers added in temp list) and add numbers at other indices and check whether sum equals target value.*/
+
 public class Combination_Sum {
 	static List<List<Integer>> result;
 	static int targ;
@@ -54,6 +57,11 @@ public class Combination_Sum {
 //Space Complexity : O(2^n *n), as a new list created at each recursive call
 //Did this code successfully run on Leetcode : Yes
 //Any problem you faced while coding this : No
+
+/* Using recursion, we have 2 choices, choose and don't choose
+ * If the element is chosen, we add it to sum, and add it to the temp list
+ * If the element is not chosen, we proceed with other elements
+ * when the sum is equal to target, we append that list to the resultant list */
 
 class Combination_Sum_Recurse {
 	List<List<Integer>> result;
