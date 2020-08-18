@@ -1,0 +1,30 @@
+Approach 1 : BackTrack
+Time Complexity : O(n*2^n)
+Space Complexity : O(length of the list) ---- > One Temporary List 
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        self.res=[]
+        self.target=target
+        self.m=len(candidates)
+        #print(self.m)
+        if candidates is None or len(candidates)==0:
+            return res
+        self.dfs(candidates,[],0,0)
+        return self.res
+        
+    def dfs(self,candidates,temp,index,curr_sum):
+        ## Base Case
+        if curr_sum>self.target or index>=self.m:
+            return
+        if curr_sum==self.target:
+            self.res.append(temp.copy())
+            return
+        ## Logic
+        for i in range(index,self.m):
+            ## Action 
+            temp.append(candidates[i])
+            ## Recursion
+            self.dfs(candidates,temp,i,curr_sum+candidates[i])
+            ### Backtrack
+            temp.pop()
+        

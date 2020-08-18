@@ -1,0 +1,31 @@
+APPROACH 1 : 
+Time Complexity : O(3^N)
+Space Complexity: O(N) ---> Recursive Space
+
+class Solution:
+    def addOperators(self, num: str, target: int) -> List[str]:
+        res = []
+
+        def dfs(cur, prev, i, partial):
+            if i == len(num) and cur == target:
+                res.append(partial)
+                return
+
+            for j in range(i, len(num)):
+                if j != i and num[i] == '0':
+                    continue
+
+                next_num_str = num[i:j + 1]
+                
+                next_num = int(next_num_str)
+                next_num_len = len(next_num_str)
+
+                if prev == None:
+                    dfs(next_num, next_num, i + next_num_len, next_num_str)
+                else:
+                    dfs(cur + next_num, next_num, i + next_num_len, partial + '+' + next_num_str)
+                    dfs(cur - next_num, -next_num, i + next_num_len, partial + '-' + next_num_str)
+                    dfs(cur - prev + prev * next_num, prev * next_num, i + next_num_len, partial + '*' + next_num_str)
+        
+        dfs(0, None, 0, '')
+        return res
