@@ -1,6 +1,6 @@
 Approach 1 : BackTrack
 Time Complexity : O(n*2^n)
-Space Complexity : Recursive stack 
+Space Complexity : O(length of the list) ---- > One Temporary List 
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         self.res=[]
