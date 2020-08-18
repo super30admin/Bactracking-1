@@ -1,5 +1,5 @@
 //time complexity: O(2^n), we have two cases: choose or not choose
-//space complexity: O(logn) ; longest branch of the tree
+//space complexity: O(n), where n is the size of the candidates array
 //executed on leetcode: yes
 
 //solution without backtracking; space inefficient since we are using a new arry list at every node
@@ -34,7 +34,7 @@ class Solution {
 
 //backtracking solution; space efficient; we are using the same list to add and remove numbers at different levels in the tree
 //time complexity : O(n)
-//space complexity: O(logn)
+//space complexity: O(n), where n is the size of the candidates array
 class Solution {
     List<List<Integer>> result;
     int targ;
