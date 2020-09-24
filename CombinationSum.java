@@ -1,5 +1,5 @@
-// Time Complexity : O(Math.pow(n,n)) because we are checking for each possibility for each candidate
-// Space Complexity : O(Math.pow(n,n) * (target / smallest element)) ; target / smallest element will give the length of the path i.e. our arraylist
+// Time Complexity : O(Math.pow(n,(target/smallest element) + 1 )) because we are checking for each possibility for each candidate
+// Space Complexity : O(target / smallest element) ; target / smallest element will give the length of the path i.e. our arraylist
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
 
