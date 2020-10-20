@@ -1,0 +1,28 @@
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        if not candidates:
+            return []
+        
+        res = []
+        def helper(target,index,path):
+            if target==0:
+                res.append(list(path))
+                return
+                
+            if target <0 or index>len(candidates):
+                return
+            
+            for i in range(index,len(candidates)):
+                #add
+                path.append(candidates[i])
+                #backtrack
+                helper(target-candidates[i],i,path)
+                #remove
+                path.pop()
+                
+            
+        
+        helper(target,0,[])
+        return res
+                          
+                          #sc is o(t/m) t is target and m is min(candidates), tc is o(n^t/m)
