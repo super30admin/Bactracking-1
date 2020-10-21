@@ -1,5 +1,5 @@
-// Time Complexity : O(target/min(candidates)), I think at max it goes these many levels deep
-// Space Complexity : O(target/min(candidates)^2), to store the curPath copies at each level, plus the recursion stack
+// Time Complexity : O(target/min(candidates)^#candidates), exponential branched by #candidates at max
+// Space Complexity : O(target/min(candidates)), plus the recursion stack
 // Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this : no, I guess this is the bruteforce approach
 
