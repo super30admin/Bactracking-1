@@ -1,0 +1,28 @@
+// given distinct integers; find all unique combinations; same number may be chosen unlimited number of times
+// space complexity : T/M (stack space: length of the maximum branch we can get: T: target; M: minimum element of the given array)
+//space complexity: N^T/M (for N elements we can have T/M length branches)
+class Solution {
+    List<List<Integer>> result;
+    public List<List<Integer>> combinationSum(int[] nums, int target) {
+       result = new ArrayList<>();
+        Arrays.sort(nums);
+       helper(nums, target, 0, new ArrayList<Integer>(), 0);
+        return result;
+    }
+
+    public void helper(int[] nums, int target, int curr_sum, List<Integer> temp, int index){
+     if(curr_sum > target) return;
+     if(curr_sum == target){
+         result.add(new ArrayList<>(temp));
+         return;
+     }
+     for(int i = index; i<nums.length; i++){
+         // make a choice
+         temp.add(nums[i]);
+         // explore the followed path
+         helper(nums, target, nums[i] + curr_sum, temp, i);
+         // undo the choice
+         temp.remove(temp.size()-1); 
+     }
+}
+}
