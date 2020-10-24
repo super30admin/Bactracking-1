@@ -1,0 +1,45 @@
+// Time complexity: O(4^N-1) 
+// space complexity: O(N)
+class Solution {
+    List<String> result;
+    public List<String> addOperators(String num, int target) {
+       result = new ArrayList<>();
+       helper(num, target, "", 0, 0, 0);
+       return result;   
+    }
+    
+    public void helper(String input, int target, String expr, long curr, long prev, int index){
+       // base case: when we traverse the complete length of input
+        if(index == input.length()){ 
+            // if sum formed == target
+            if(curr == target){
+                result.add(expr);
+            }
+            return;
+        }
+        
+        for(int i = index; i < input.length(); i++){
+            
+            long elem = Long.parseLong(input.substring(index, i+1));
+            
+            // preeceding zeros
+            if(i != index && input.charAt(index) == '0')
+                break;
+            
+            // corner case
+            if(index == 0){
+                helper(input, target, expr + elem, elem, elem, i+1);
+            }
+            else
+            {
+                // +
+                helper(input, target, expr + "+" + elem, curr + elem, elem, i+1);
+                // -
+                helper(input, target, expr + "-" + elem, curr - elem, -elem, i+1);
+                // *
+                helper(input, target, expr + "*" + elem, curr - prev + prev*elem, prev*elem, i+1);
+            }
+        }
+        
+    }
+}
