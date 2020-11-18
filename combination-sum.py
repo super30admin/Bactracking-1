@@ -1,3 +1,6 @@
+# Time Complexity: Exponential O(N^N)
+# Space Complexity: Exponential
+# Approach: Recursively add all the numbers to a slate and at every stage, check if the sum of the numbers is equal to the target. 
 class Solution(object):
     def combinationSum(self, candidates, target):
         """
@@ -18,9 +21,9 @@ class Solution(object):
                 return
             
             for index in range(len(S)):
-                slate.append(S[index])
-                helper(S[index:], slate)
-                slate.pop()
+                slate.append(S[index]) # Action
+                helper(S[index:], slate) # Recurse
+                slate.pop() # Backtrack
                 
         if candidates:
             helper(candidates,[])
