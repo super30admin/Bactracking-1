@@ -1,0 +1,56 @@
+
+//Using Normal recursion
+// Time Complexity : O(n^m) where n is the no of choices at each level, m is the level of tree
+// Space Complexity : O(n^m) for each level we are maintaining copy of array list i.e. at every node we are creating new arraylist
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this :No
+
+
+// Your code here along with comments explaining your approach
+// Using Normal recursion
+//Algo : Based on the below 
+// Choose nodes ==> helper(candidates, target, sum, new ArrayList<>(temp), index + 1);
+//Dont choose nodes ==> helper(candidates, target, sum + candidates[index], new ArrayList<>(temp), index);
+
+
+//Using Backtracking
+// Time Complexity : O(n^m) where n is the no of choices at each level, m is the level of tree
+// Space Complexity : O(n+m) here we are using only one list to add the result so that list will be n+m
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this :No
+
+
+// Your code here along with comments explaining your approach
+//Algorithm
+//action 
+//recurse 
+//backtrack
+
+
+
+
+//Expression add operators using Normal recursion
+// Time Complexity : O(4^n) i.e. at every node we have 4 choices +,-,*, ""
+// Space Complexity : O(4^n) 
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this :No
+
+
+// Your code here along with comments explaining your approach
+// 1) Parse string to Long value
+//2) based on the operator call the recursive function and update the cal and tail value
+// update the cal value for + operator
+// cal + curr
+//and tail value will +curr
+
+// update the cal value for - operator
+// cal - curr
+//and tail value will -curr
+
+// update the cal value for - operator
+// cal - tail + tail * curr
+//and tail value will be tail * curr
+
+
+ 
+
