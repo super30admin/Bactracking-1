@@ -34,6 +34,14 @@ public class CombSumUsingRec {
 		temp.add(candidates[index]);
 		helper(candidates, target, sum + candidates[index], new ArrayList<>(temp), index);
 
+		// we can reverse the choose and dont choose
+		// choose
+//		List<Integer> temp2 = new ArrayList<Integer>();
+//		temp2.add(candidates[index]);
+//		helper(candidates, target, sum + candidates[index], temp2, index);
+		// dont choose
+//		helper(candidates, target, sum, new ArrayList<>(temp), index + 1);
+
 	}
 
 	public static void main(String[] args) {
