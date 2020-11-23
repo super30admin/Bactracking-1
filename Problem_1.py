@@ -1,12 +1,12 @@
 """
 Time Complexity : 
-Space Complexity : 
+Space Complexity : O(1) for temp array and O(n+m) for recursive stack
 Did this code successfully run on Leetcode : Yes
 Any problem you faced while coding this : No
 
 
 Your code here along with comments explaining your approach
-I have 3 reaons below. The first one is backtracking using for loop. The second is backtrack without for loop
+I have 3 codes below. The first one is backtracking using for loop. The second is backtrack without for loop
 and the thirs is normal recursion. Backtracking is action , recurse and backtrack. In recursion, the solution
 consumes a lot of space as a temp array is made at every node, which increases the space exponentially.
 With backtracking, we use the same list for whole recursion and keep on removing the value once recursion at
