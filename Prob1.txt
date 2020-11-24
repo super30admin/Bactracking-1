@@ -1,0 +1,30 @@
+# Time Complexity: O(n*target)
+# Space Complexity: O(target)
+# Did this code successfully run on LeetCode: Yes
+
+# Three line Explanation:
+# 1. Use a recursive algorithm (choose and not choose) 
+# 2. Maintain a local list, call recursive, but also remove from list (if added in the first place) - backtracking
+# 3. Keep a track of sum. Once it reaches target, add to main list, otherwise return if exceeded target or run out of elements.
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        if len(candidates) == 0:
+            return []
+        self.candidates = candidates
+        self.target = target
+        self.result = []
+        self.helper(0, [], 0)
+        return self.result
+    
+    def helper(self, sumVal, curList, index):
+        if sumVal > self.target or index == len(self.candidates):
+            return
+        if sumVal == self.target:
+            self.result.append(curList[:])
+            return
+        self.helper(sumVal, curList, index+1)
+        curList.append(self.candidates[index])
+        self.helper(sumVal + self.candidates[index], curList, index)
+        curList.pop()
+        return
