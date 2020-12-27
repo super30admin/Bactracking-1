@@ -27,3 +27,4 @@ class Solution {
 
 // Time complexity : Exponential
 // Space Complexity : O (m+n)
+// m is the target, n is the number of elements
