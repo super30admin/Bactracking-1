@@ -21,8 +21,38 @@ class Solution {
         }
     }
 }
+
+
 // Time - O(N+M)
 // space - O(N+M)
+class Solution {
+    List<List<Integer>> result = new ArrayList<>();
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        if(candidates.length == 0) {
+            return result;
+        }
+        
+        helper(candidates, 0, target, 0, new ArrayList<>());
+        return result;        
+    }
+    
+    private void helper(int[] candidates, int index, int target, int curSum, List<Integer> list) {
+        
+        if(target < curSum) {
+            return;
+        }
+        if(target == curSum) {
+            result.add(new ArrayList<>(list));
+            return;
+        }
+        
+        for(int i=index;i<candidates.length;i++) {
+            list.add(candidates[i]);
+            helper(candidates, i, target, curSum + candidates[i], list);
+            list.remove(list.size()-1);
+        }
+    }
+}
 
 class Solution {
     List<List<Integer>> result = new ArrayList<>();
