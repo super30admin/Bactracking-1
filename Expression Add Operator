@@ -1,0 +1,52 @@
+//TC: O(4^n)
+//SC: O(n*(4^n)) -- ???
+
+//Approach 1 (RESURSION): Idea is to consider 4 cases for each performed opertaions and handle special case for leading or intermediate ZERO "0's".
+
+class Solution {
+    List<String> result;
+    public List<String> addOperators(String num, int target) {
+        result = new ArrayList<>();
+        if(num==null || num.length()==0){
+            return result;
+        }
+        
+        helper(num, target, "" , 0 , 0 , 0);
+        return result;
+    }
+    
+    private void helper(String num, int target, String path, long calculated, long tail, int index){
+        //base        
+        if(index>=num.length()){
+            if(calculated==target){
+                result.add(path);
+            }
+            return;
+         }
+
+        //logic
+        for(int i = index ; i < num.length() ; i++){
+            //Additional Case to handle ZERO "O" in the string
+            if (num.charAt(index) == '0' && i != index ){
+                continue;
+            }
+            Long current = Long.parseLong(num.substring(index, i+1));
+
+            if(index==0){
+                //case1 - No Operator
+                helper(num,target,path+current, current, current, i+1);
+            }
+            else{
+                //case2 " + "
+               helper(num,target,path  + "+"  + current, calculated + current, current, i+1);
+                
+                //case3 " - "
+                helper(num,target, path + "-" + current, calculated - current, -current, i+1);
+                
+                //case4 " * "
+                helper(num,target,path + "*" + current, calculated -tail + tail * current,  tail * current, i+1);
+            }
+            
+        }
+    }
+}
