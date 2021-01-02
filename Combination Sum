@@ -1,0 +1,75 @@
+//Approach 1 : Recursion - Idea is to use SKIP and TAKE analogy
+//TC: O(n^m) - Exponential
+//SC: O(n^m) - Exponential
+
+class Solution {
+    List<List<Integer>> result;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result = new ArrayList<>();
+        
+        if(candidates.length == 0 || candidates==null){
+            return result;
+        }
+        
+        helper(candidates, target, 0, 0, new ArrayList<>());
+        return result;
+    }
+    
+    
+    private void helper(int[] candidates,int target, int index, int localSum, List<Integer> lst){
+        //base
+        if(index >= candidates.length  || localSum > target){
+            return;
+        }
+        
+        if(localSum == target){
+            // System.out.println(lst);
+            result.add(lst);
+            return;
+        }
+        // System.out.println("index: " + index + " localSum " + localSum);
+        //skip
+        helper(candidates,target, index + 1, localSum, new ArrayList<>(lst));
+        //take
+        lst.add(candidates[index]);
+        helper(candidates,target, index, localSum + candidates[index],  new ArrayList<>(lst));
+    }
+}
+
+
+//Approach 1 : Backtracking - Idea is to remove element and check all combinations
+//TC: O(n^target) -> target = length of candidate array
+//SC: O(target) --> for [1]--> target= 8(1+1+1+1+1+1+1+1)
+
+class Solution {
+    List<List<Integer>> result;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result = new ArrayList<>();
+        
+        if(candidates.length == 0 || candidates==null){
+            return result;
+        }
+        helper(candidates, target, 0, 0, new ArrayList<>());
+        return result;
+    }
+    
+    
+    private void helper(int[] candidates,int target, int index, int localSum, List<Integer> lst){
+        //base
+        if(localSum > target){
+            return;
+        }
+        
+        if(localSum == target){
+            result.add(new ArrayList<>(lst));
+            return;
+        }
+        //index is for initialization and we pass recursive call with i
+        for(int i = index ; i < candidates.length ; i++){
+            lst.add(candidates[i]);
+            // System.out.println(" i " + index  + " sum " + localSum + " " + lst + "");
+            helper(candidates, target , i, localSum + candidates[i], lst);
+            lst.remove(lst.size()-1);
+        }
+    }
+}
