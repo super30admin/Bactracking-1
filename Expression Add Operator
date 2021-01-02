@@ -1,5 +1,5 @@
 //TC: O(4^n)
-//SC: O(n*(4^n)) -- ???
+//SC: O(n*(4^n)) -- For both solutions???
 
 //Approach 1 (RESURSION): Idea is to consider 4 cases for each performed opertaions and handle special case for leading or intermediate ZERO "0's".
 
@@ -47,6 +47,95 @@ class Solution {
                 helper(num,target,path + "*" + current, calculated -tail + tail * current,  tail * current, i+1);
             }
             
+        }
+    }
+}
+
+
+class Solution {
+    List<String> result;
+    public List<String> addOperators(String num, int target) {
+        result = new ArrayList<>();
+        
+        if(num==null || num.length() == 0){
+            return result;
+        }
+        
+        backtrack(num, target, new StringBuilder(), 0, 0, 0);
+        
+        return result;
+    }
+    
+/**--**--** Backtracking Optimized  SOLUTION **--**--**/  
+/*
+"123" - > 6    
+1
+1+2
+1+2+3<--
+1+2-3
+1+2*3
+1-2
+1-2+3
+1-2-3
+1-2*3
+1*2
+1*2+3
+1*2-3
+1*2*3<--
+1+23
+1-23
+1*23
+12
+12+3
+12-3
+12*3
+123
+*/
+
+//Approach2: Idea is to use STRINGBUILDER and use setLength for string builder to backtrack.
+
+    private void backtrack(String num, int target, StringBuilder sb, long calculated, long tail, int index){
+        // System.out.println(sb.toString());
+        //base       
+        if(index == num.length()){
+            if(calculated==target){
+                result.add(sb.toString());
+            }
+            return;
+        }
+        
+        //logic
+        for(int i = index ; i < num.length() ; i++){
+            if(num.charAt(index)=='0' && index != i){       //if '0' encountered in the middle of string-> ignore/continue
+                continue;
+            }
+            
+            Long current = Long.parseLong(num.substring(index,i+1));
+            int len = sb.length();          //IMP. part to store length of SB to perform backtrack of all cases on it
+            //NO operator
+            if(index==0){
+                sb.append(current);
+                backtrack(num, target, sb, current, current, i + 1);
+                sb.setLength(len);
+            }else{
+                //case1: "+"
+                sb.append("+");     //Append operator   -> Action
+                sb.append(current);     //append substringValue -> Action
+                backtrack(num, target, sb, calculated+current, current, i + 1); //Recurse
+                sb.setLength(len);      //backtrack
+                
+                //case1: "+"
+                sb.append("-");
+                sb.append(current);
+                backtrack(num, target, sb, calculated-current, -current, i + 1);
+                sb.setLength(len);
+                
+                //case1: "+"
+                sb.append("*");
+                sb.append(current);
+                backtrack(num, target, sb, calculated-tail + tail * current, tail*current, i + 1);
+                sb.setLength(len); 
+            }
         }
     }
 }
