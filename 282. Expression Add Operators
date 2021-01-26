@@ -1,0 +1,69 @@
+class Solution:
+
+    def fun(self, idx, num,substr,target, result):
+        if(idx == len(num) - 1):
+            substr += num[idx]
+            res = self.findvalue(substr);
+            if(res == target):
+                result.append(substr)
+            return 
+        
+        substr += num[idx]
+        # pick any of the four characters
+        for char in ['+','*','-','']:
+            self.fun(idx + 1, num, substr+char, target, result);
+            
+    
+    # fucntion to find the combinations
+    def helper(self, idx, num, path, calc, prev, target, result):
+        if(idx == len(num)):
+            #print(path)
+            if(calc == target):
+                result.append(''.join(path));
+            return
+        for i in range(idx, len(num)):
+            
+            # skip the numbers containing preceding '0' 
+            if(i>idx and num[idx] == '0'):
+                continue;
+            curr = num[idx:i+1];
+            if(idx == 0): 
+                path.append(curr);
+                self.helper(i+1, num, path, int(curr), int(curr), target, result);
+                path.pop()
+            else:
+                # for '+' operator
+                path.append('+');
+                path.append(curr);
+                self.helper(i+1, num, path, calc + int(curr), int(curr), target, result);
+                path.pop();
+                path.pop()
+                
+                # for '-' operator
+                path.append('-');
+                path.append(curr);
+                self.helper(i+1, num, path, calc - int(curr), -int(curr), target, result );
+                path.pop();
+                path.pop()
+                
+                # for '*' operator
+                path.append('*');
+                path.append(curr);
+                self.helper(i + 1, num, path, calc - prev + int(curr) * prev, int(curr)*prev, target, result);
+                path.pop();
+                path.pop()
+        
+    
+    def addOperators(self, num: str, target: int) -> List[str]:
+        path = []
+        result = []
+        self.helper(0, num, path, 0, 0, target, result)
+        return result;
+    
+    '''
+    n = length of the num string
+    time complexity = O(n*4^n)
+    space complexity = o(n)
+    
+    '''
+        
