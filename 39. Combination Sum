@@ -1,0 +1,28 @@
+class Solution:
+    
+    def fun(self, idx, candidates, targetleft, sublist, result):
+        if(targetleft == 0):
+            #print(sublist, idx)
+            result.append(list(sublist));
+            return
+        if(targetleft < 0):
+            return
+        
+        for i in range(idx, len(candidates)):
+            sublist.append(candidates[i]);
+            self.fun(i, candidates, targetleft - candidates[i], sublist, result);
+            sublist.pop();
+            #print(i,sublist)
+    
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        result, sublist = [], []
+        self.fun(0, candidates, target, sublist, result)
+        return result;
+    
+    
+    '''
+    time complexity = O(2^n)
+    space complexity = O(n)
+    '''
+        
+        
