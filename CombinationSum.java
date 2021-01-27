@@ -21,5 +21,5 @@ class Solution {
     }
 }
 
-//Time complexity - Exponential time complexity
-//Space complexity - exponential
+//Time complexity - O(N*4^N)
+//Space complexity - O(N)
