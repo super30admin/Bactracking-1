@@ -1,17 +1,17 @@
 //Problem 68: Combination Sum
-//Time Complexity: O(n), n stands for input array length
-//Space Complexity : O(n), because I'm using a current path list for storing current elements on each recursive call; 
+//Time Complexity: O(something * 2^n)=> exponential, n stands for input array length
+//Space Complexity : O(T), because I'm using a current path list for storing current elements on each recursive call and there could be a case when target is 10 and candiate is '1', so current path can contain 10 1's. Therefore SC:O(T) 
 
 /*Steps
 
-   1) Bruteforce:   //TC:O(N) | SC:O(N^2), because each time I'm copying existing current path to two new list
+   1) Bruteforce:   //TC:O(something*2^N), say exponential | SC:O(N^2), because each time I'm copying existing current path to two new list
       Basically I have to choose the element or not. On each recursive call, I copied my current path list to two new list called op1  & op2. Then if I'm chosing the element then I added it into op1 and passed it with the recursive call.In addition, I subtracted its value from the target sum and passed the same index. Otherwise, if I'm not chosing the current element I simply passed my op2 and current target, along with index+1.
 
       If targetSum ==0 then I just added the current path in my final result, otherwise if target<0 or  index>input array.length, then I just returned.
       
       Once function returns, I did backtracking and removed last index from the current path list.
 
-    2) Optimal : //TC:O(N) | SC:O(N);
+    2) Optimal : //TC:O(something * 2^N) | SC:O(N);
        Similar to above, just use 'for loop' for iterating from start to end of the input array and making the recursive call. It helps in optimizing space complexity. Now no need to copy current path to new list on each recursive call. Only copy the current path into result list when target==0; 
 
 */
@@ -27,19 +27,48 @@ class Solution68 {
         //egde
         if(candidates==null || candidates.length==0) return res;
         
-        //TC:O(N) | SC:O(N);
-        helper(candidates,target,new ArrayList<>(), 0,candidates.length);
+        //TC:O(something * 2^N) | SC:O(N);
+        //With For loop
+        //helper(candidates,target,new ArrayList<>(), 0,candidates.length);
         
-        //Bruteforce
-        //TC:O(N) | SC:O(N^2);-> Using Input Output Method
+         //TC:O(something * 2^N) | SC:O(N);
+        //Without For loop
+        helperNormal(candidates,target,new ArrayList<>(), 0);
+        
+        //Bruteforce: TC:O(something*2^N) | SC:O(N^2);
         //helper(candidates,target,new ArrayList<>(), 0);
         
         return res;
         
     }
-
+    
+    //TC:O(N) | SC:O(N^2), because each time I'm copying existing current path to two new list
+    private void helper(int[] candidates, int target,List<Integer> currPath,int idx){
+        
+        //base
+        if(idx>=candidates.length) return;
+        
+        if(target<0) return;
+        
+        if(target==0){
+            res.add(currPath);
+            return;
+        }
+        
+        List<Integer> op1 = new ArrayList<>(currPath);
+        List<Integer> op2 = new ArrayList<>(currPath);
+        
+        op1.add(candidates[idx]);
+        
+        //choose
+        helper(candidates,target-candidates[idx],op1,idx);
+        //not choose
+        helper(candidates,target,op2,idx+1);
+                
+    }
+    
     //TC:O(N) | SC:O(N);
-    private void helper(int[] candidates, int target,List<Integer> currPath,int start, int end){
+    /*private void helper(int[] candidates, int target,List<Integer> currPath,int start, int end){
         
         if(start>=end || target<0 ) return;
         
@@ -54,10 +83,10 @@ class Solution68 {
             currPath.remove(currPath.size()-1);
         }
         
-    }
+    }*/
     
-    //TC:O(N) | SC:O(N^2), because each time I'm copying existing current path to two new list
-    /*private void helper(int[] candidates, int target,List<Integer> currPath,int idx){
+     //TC:O(N) | SC:O(N^2), because each time I'm copying existing current path to two new list
+    private void helperNormal(int[] candidates, int target,List<Integer> currPath,int idx){
         
         //base
         if(idx>=candidates.length) return;
@@ -69,19 +98,14 @@ class Solution68 {
             return;
         }
         
-        List<Integer> op1 = new ArrayList<>(currPath);
-        List<Integer> op2 = new ArrayList<>(currPath);
-        
-        op1.add(candidates[idx]);
-        
         //choose
-        helper(candidates,target-candidates[idx],op1,idx);
+        currPath.add(candidates[idx]); //action
+        helperNormal(candidates,target-candidates[idx],currPath,idx);
+        //backtrack on action
+        currPath.remove(currPath.size()-1);
         //not choose
-        helper(candidates,target,op2,idx+1);
-        
-        if(op1.size()>0) op1.remove(op1.size()-1);
-        if(op2.size()>0) op2.remove(op2.size()-1);
-        
-    }*/
+        helperNormal(candidates,target,currPath,idx+1);
+                
+    }
     
 }
