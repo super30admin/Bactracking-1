@@ -1,5 +1,14 @@
 # Created by Aashish Adhikari at 5:13 PM 1/26/2021
 
+'''
+Time Complexity:
+O(2^n)
+
+Space Complexity:
+O(h) where h is the height of the tree, h can be n in the worst case.
+'''
+
+
 class Solution(object):
 
 
