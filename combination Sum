@@ -1,0 +1,27 @@
+class Solution {
+    List<List<Integer>> result;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result= new ArrayList<List<Integer>>();
+        helper(candidates,0,target, new  ArrayList<>());
+        return result;
+    }
+    public void helper(int[] candidates, int i, int target, List<Integer> path){
+        
+        if(i==candidates.length|| target<0){
+            return;
+        }
+        if( target==0){
+            result.add(new ArrayList<>(path));
+            return;
+        }
+        for(int index = i; index < candidates.length; index++) {
+            path.add(candidates[index]);
+            helper(candidates, index, target - candidates[index], path);
+            path.remove(path.size() - 1);
+    }
+}
+}
+
+//Time Complexity: Exponential 
+//Space Complecity: O(n) (not clear about it)
+//Approach: backtracking, not creating new arrylist everytime we make a recursive call instead just update the list
