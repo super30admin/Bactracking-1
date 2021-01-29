@@ -2,9 +2,10 @@
 
 '''
 Time Complexity:
-O(2^n)
+O(2^h) since a mximum of 2 ^h nodes in a binary tree.
 
 Space Complexity:
+Store the current solution at each node, but reuse the array.
 O(h) where h is the height of the tree, h can be n in the worst case.
 '''
 
@@ -30,11 +31,11 @@ class Solution(object):
         else:
 
             # left path : dont choose the element
-            self.helper(candidates, target, index + 1, curr_path)
+            self.helper(candidates, target, index + 1, curr_path) # <-------------Not passing a deep copy but the same array of the parent
 
             # right path : choose the element
             curr_path.append(candidates[index])
-            self.helper(candidates, target - candidates[index], index, curr_path)
+            self.helper(candidates, target - candidates[index], index, curr_path)#<-------------Not passing a deep copy but the same array of the parent
 
             # after the right side finishes, remove the last element that was appended to as we need to return the execution to the upper level
             curr_path.pop()
