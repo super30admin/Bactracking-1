@@ -1,0 +1,59 @@
+//Time complexity- o(4^N) N is no of nums
+//spac complexity - o(N)
+class Solution {
+    List<String> result;
+    int tar;
+    public List<String> addOperators(String num, int target) {
+        
+        result = new ArrayList<>();
+        tar = target;
+        if(num == null || num.length() == 0) return result;
+        //it will be empty first
+        // StringBuilder muttable so backtracking
+        helper(num,new StringBuilder(),0,0,0);
+        return result;
+    }
+    
+    private void helper(String num,StringBuilder sb,long currSum,long tail,int index) {
+        //base
+        if(num.length() == index) {
+            if(tar == currSum) {
+                result.add(sb.toString());
+            }
+            return;
+        }
+        
+        //logic
+        for(int i =index; i<num.length();i++){
+        	// for zero as first index do nothing so we dont consider '05' to '5'
+            if(index != i && num.charAt(index) == '0') continue;
+            long curr = Long.parseLong(num.substring(index,i+1));
+            //we need to backtrack before new characters added so store length
+            int len = sb.toString().length();
+            //no operation
+            if(index == 0){
+                //we just append next sub string
+                sb.append(curr);
+                helper(num,sb,curr,curr,i+1);
+                sb.setLength(len);
+            } else{
+                //append + and next sub string
+                sb.append("+");
+                sb.append(curr);
+                helper(num,sb,currSum+curr,curr,i+1);
+                sb.setLength(len);
+                //-
+                sb.append("-");
+                sb.append(curr);
+                helper(num,sb,currSum-curr,-curr,i+1);
+                sb.setLength(len);
+                //
+                sb.append("*");
+                sb.append(curr);
+                helper(num,sb,currSum-tail + tail*curr,tail*curr,i+1);
+                sb.setLength(len);
+            }
+        }
+        
+    }
+}
