@@ -6,7 +6,7 @@ class Solution:
         Time Complexicity: O(2^n)
         Space Complexicity: O(n)
         
-        Worked in leetcode: No
+        Worked in leetcode: Yes
 
         Approach: Use of backtracking (each node, the generated list has to be re-initialized)
         1. use helper function recursively to make target == 0
@@ -31,6 +31,7 @@ class Solution:
         
         if target == 0:
             self.result.append(path.copy())
+            return
         
         # logic
         # don't choose item
