@@ -1,0 +1,34 @@
+//Time complexity- o(N^T/M) N is no of candidates, M is min candidate, T is target
+//spac complexity - o(T/M)
+//Leetcode - Yes
+class Solution {
+    
+    List<List<Integer>> result;
+    //need to come up with all combination so recursion or backtracking
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result = new ArrayList<>();
+        
+        if(candidates == null || candidates.length == 0) return result;
+        helper(candidates,0,new ArrayList<>(),target);
+        return result;
+    }
+    
+    private void helper(int [] candidates, int index,List<Integer> path, int target){
+        //if the target become < 0 just return 
+        if(target < 0) return;
+        if(target == 0) {
+            //we are backtracking so at the end the path would be empty so need deep copy to add
+            result.add(new ArrayList<>(path));
+            return;
+        }
+        
+        //DFS with for loop
+        for(int i = index; i<candidates.length;i++) {
+            path.add(candidates[i]);
+            //keep adding candidates until target is zero .
+            //we can repeat the candidate so index is i 
+            helper(candidates,i,path,target-candidates[i]);
+            path.remove(path.size()-1);
+        }
+    }
+}
