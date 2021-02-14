@@ -1,5 +1,9 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        '''
+        Time Complexity: O(2^n)
+        Space Complexity: O(n) since we are backtracking
+        '''
         o = []
         
         # backtrack solution
