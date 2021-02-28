@@ -24,7 +24,7 @@ Step 11: In the combinationSum function, sort the function and call the helper f
          arguments (candidates,target,0,sub_list)
 Step 12: Return the output
 
-Time Complexity - O(2^N)
+Time Complexity - O(N)
 Space Complexity - O(N)
 
 Code accepted on leetcode
