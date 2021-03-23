@@ -37,7 +37,7 @@ public List<String> addOperators(String num, int target) {
        if (index == num.length) {
 
            /**
-            * Out Goal:
+            * Our Goal:
             * 1. once we form a expression, if that expression evaluates to our "target" then this is our solution.
             */
 
