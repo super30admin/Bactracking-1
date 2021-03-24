@@ -1,5 +1,5 @@
-//Time Complexity: O(N^h) or O(N^(T/minEl)) where T is the target; minEl is the minimum element in the array
-//Space Complexity: O(h) or O(T/minEl) where h is the height of the tree
+//Time Complexity: O(N^h) or O(N^((T/minEl)+1)) where T is the target; minEl is the minimum element in candidates
+//Space Complexity: O(h) or O((T/minEl)+1) where h is the height of the tree
 
 //Code
 class Solution {
