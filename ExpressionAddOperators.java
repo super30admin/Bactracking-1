@@ -1,6 +1,6 @@
 class ExpressionAddOperators {
     
-    // Time Complexity: O(N ^ 3)
+    // Time Complexity: O(3 ^ N)
     // Space Complexity: O(N)
     
     private List<String> result = new ArrayList<>();
