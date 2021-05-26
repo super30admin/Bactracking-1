@@ -1,4 +1,6 @@
-class Solution {
+//Time O(2^(n*target))
+//Space O(H)
+    class Solution {
 
     protected void backtrack(
             int target,
