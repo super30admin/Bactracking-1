@@ -1,5 +1,6 @@
 /*
-Desc : We check every possible combination using recursion and add every combination that produces the target
+Desc : We check every possible combination using recursion and add every combination that produces the target,
+for every wrong combination we backtrack(by removing the corresponding elements from path list) and proceed the dfs until the target is achived.
 Time Complexity : O(2^n)
 Space Complexity : O(1)
 */
