@@ -11,7 +11,7 @@ class Solution:
             for idx in range(index, len(num) + 1):
                 curr_str = num[index:idx + 1]
                 cur = int(curr_str)
-                if
+
 
                 if index == 0:
                     helper(calc=curr, index=idx + 1, tail=curr, path=path + curr)
