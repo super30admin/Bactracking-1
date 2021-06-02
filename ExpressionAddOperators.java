@@ -4,8 +4,7 @@
 // Any problem you faced while coding this : No
 
 /*
-    We search through the entire tree, and try to find the element x and y 
-    along with their corresponding parent and depth
+    For each node we have 4 options - Add, Subtract, Multiply, Append
 */
 
 class Solution {
