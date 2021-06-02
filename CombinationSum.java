@@ -4,8 +4,8 @@
 // Any problem you faced while coding this : No
 
 /*
-    We search through the entire tree, and try to find the element x and y 
-    along with their corresponding parent and depth
+    For each node we have two options to skip the element or to take the element and hence reducing the target.
+    The base condition being either the target becoming 0 or index running out of bounds
 */
 
 class Solution {
