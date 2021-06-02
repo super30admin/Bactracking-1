@@ -24,3 +24,5 @@ class Solution:
         self.backtrack(candidates, target-candidates[i], path, i)
         path.pop(len(path)-1)
         
+#  time complexity is exponential and space complexity is num
+        
