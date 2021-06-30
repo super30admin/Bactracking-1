@@ -30,6 +30,42 @@ A solution set is:
   [3,5]
 ]
 
+//Time Complexity = Exponential 2^n
+//Space Complexity = O(n)
+
+class Solution {
+        List<List<Integer>> result;
+    
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        
+        result = new ArrayList<>(); 
+        
+        if(candidates == null || candidates.length == 0) return result; 
+        
+        helper(candidates, target, 0, new ArrayList<>());
+        
+        return result; 
+    }
+    
+    private void helper(int[] candidates, int target, int index, List<Integer> path){
+        
+        if(target == 0){
+            result.add(new ArrayList<>(path));
+            return; 
+        }
+        
+        if(target < 0) return; 
+        
+        for(int i = index; i < candidates.length; i++){
+            path.add(candidates[i]);
+            helper(candidates, target - candidates[i], i ,path);
+            path.remove(path.size() - 1);
+        }
+        
+        
+    }
+}
+
 ## Problem2
 Expression Add Operators(https://leetcode.com/problems/expression-add-operators/)
 
@@ -56,3 +92,43 @@ Example 5:
 Input: num = "3456237490", target = 9191
 Output: []
 
+//Time Complexity = Exponential 2^n
+//Space Complexity = O(n)
+
+class Solution {    
+    
+    //for each pivot, iterate from. pivot to the end
+    List<String> result; 
+    public List<String> addOperators(String num, int target) {
+      result = new ArrayList<>(); 
+      helper(num, target, "", 0, 0, 0);
+      return result;   
+    }
+    
+    private void helper(String num, int target, String path, int index, long calc, long tail){
+        
+        //base
+        if(index == num.length()){
+            if(calc == target){
+                result.add(path);
+                return; 
+            }
+        }
+        
+        //logic
+        
+        for(int i = index; i < num.length(); i++){
+            
+            if(num.charAt(index) == '0' && index != i) continue;
+            long curr = Long.parseLong(num.substring(index, i + 1));
+            if(index == 0){
+                helper(num, target, path + curr , i+1, curr, curr); 
+            }else{
+                helper(num, target, path + '+' + curr, i + 1, calc + curr, curr); 
+                helper(num, target, path + '-' + curr, i + 1, calc - curr, - curr); 
+                helper(num, target, path + '*' + curr, i + 1, calc - tail + (tail * curr) , (tail * curr)); 
+            }
+        }
+    }
+    
+}
