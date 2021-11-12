@@ -1,0 +1,61 @@
+class Solution {
+    
+    List <String> result;
+    public List<String> addOperators(String num, int target) {
+        
+        result=new ArrayList<>();
+        helper(num, target, 0, 0, 0, "");
+        return result;
+        
+    }
+    
+    private void helper(String num, int target, long prevSum, long tail, int index, String path)
+    {
+        
+        //Base conditions
+        if(index == num.length())
+        {
+            if(prevSum==target)
+            {
+                result.add(path);
+                return;
+            }
+            
+            return;
+        }
+        
+        
+        
+        for(int i=index; i<num.length(); i++)
+        {
+            if(num.charAt(index) == '0' && index != i)
+            {
+                continue;
+            }
+        
+            Long currNum = Long.parseLong(num.substring(index, i+1));
+            
+            if(index == 0)
+            {
+                helper(num, target, prevSum+currNum, currNum, i+1, path+currNum );
+                
+            }
+            
+            else
+            {
+                //+
+                helper(num, target, prevSum+currNum, currNum, i+1, path + "+" + currNum );
+                
+                //-
+                helper(num, target, prevSum-currNum, (-1)* currNum, i+1, path + "-" + currNum );
+                
+                //*
+                long mult = (prevSum-tail) + (tail*currNum);
+                helper(num, target, mult, tail*currNum, i+1, path + "*" + currNum );
+                
+            }
+            
+        }
+    }
+      
+}
