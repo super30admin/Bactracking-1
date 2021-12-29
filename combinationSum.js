@@ -65,3 +65,57 @@ var combinationSum = function (candidates, target) {
   helper(candidates, target, 0, []);
   return resultsArr;
 };
+
+// Iterative recursion approach:
+var combinationSum = function (candidates, target) {
+  const resultsArr = [];
+  if (!candidates.length) return resultsArr;
+
+  const helper = (candidates, target, index, path) => {
+    // base conditions
+    if (target === 0) {
+      resultsArr.push(path);
+    }
+
+    if (target < 0 || index === candidates.length) {
+      return;
+    }
+
+    // logic
+    for (let i = index; i < candidates.length; i++) {
+      let newPath = [...path];
+      newPath.push(candidates[i]);
+      helper(candidates, target - candidates[i], i, newPath);
+    }
+  };
+
+  helper(candidates, target, 0, []);
+  return resultsArr;
+};
+
+//  Iterative recursion with backtracking - more efficient than above
+var combinationSum = function (candidates, target) {
+  const resultsArr = [];
+  if (!candidates.length) return resultsArr;
+
+  const helper = (candidates, target, index, path) => {
+    // base conditions
+    if (target === 0) {
+      resultsArr.push([...path]);
+    }
+
+    if (target < 0 || index === candidates.length) {
+      return;
+    }
+
+    // logic
+    for (let i = index; i < candidates.length; i++) {
+      path.push(candidates[i]); // action
+      helper(candidates, target - candidates[i], i, path); // recurse
+      path.pop(); // backtracking
+    }
+  };
+
+  helper(candidates, target, 0, []);
+  return resultsArr;
+};
