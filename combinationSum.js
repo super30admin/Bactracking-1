@@ -1,4 +1,4 @@
-// Time Complexity : O(n)
+// Time Complexity : O(2^n) - exponential
 // Space Complexity : O(n) - recursive stack
 // Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this : no
