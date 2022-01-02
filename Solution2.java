@@ -17,6 +17,9 @@ class Solution {
         helper(num,target,0,0,"",0);
         return result;
     }
+
+    //tail stores the last operation
+    //path stores the list of operation till far
     private void helper(String num, int target, int index,long calc, String path,long tail){
         
         //base case
