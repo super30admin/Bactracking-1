@@ -1,3 +1,52 @@
+// expression add operators
+//tc 4^n
+//sc n
+class Solution {
+    List<String> result;
+    public List<String> addOperators(String num, int target) {
+        result = new ArrayList<>();
+        helper(num, target, 0, 0, 0, "");
+        return result;
+    }
+    private void helper(String num, int target, long prevNum, long tail, int index, String path){
+        
+        if(index==num.length()){
+            if(prevNum == target){
+                result.add(path);
+                return;
+            }
+            return;
+        }
+        
+        for(int i = index; i<num.length(); i++){
+            if(num.charAt(index)=='0' && index!=i){
+                continue;
+            }
+            long currNum = Long.parseLong(num.substring(index,i+1));
+            if(index==0){
+                helper(num, target, prevNum + currNum, currNum, i+1, path + currNum);
+            }
+            else{
+//String num, int target, long prevNum, long tail, int index, String path                
+                //+
+                helper(num, target, prevNum + currNum, currNum, i+1, path + '+' + currNum);
+                
+                //-
+                helper(num, target, prevNum - currNum, (-1)*currNum, i+1, path + '-' + currNum);
+                
+                //*
+                long newMultiply = (prevNum - tail) + (tail * currNum);
+                
+                helper(num, target, newMultiply, tail * currNum, i + 1, path + '*' + currNum);
+                
+            }
+        }
+        
+        
+    }
+}
+
+
 // cmbination sum
 //tc is n square // sc is n
 // class Solution {
