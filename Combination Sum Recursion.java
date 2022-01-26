@@ -13,11 +13,13 @@ class Solution {
     
     private void helper(int[] candidates, int index, List<Integer> path, int target){
         // base case
+        // if target is reached, then add that path to the result list
         if(target == 0){
             result.add(path);
             return;
         }
         
+        // if target turns negative or index goes out of bound, then return
         if(target < 0 || index == candidates.length) return;
         
         // logic
