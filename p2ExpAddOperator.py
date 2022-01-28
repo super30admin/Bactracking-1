@@ -1,6 +1,6 @@
 """
 
-#time: O(3^N)
+#time: O(4^N)
 #space: O(N) N is depth of recursion
 
 """
