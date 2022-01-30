@@ -1,3 +1,7 @@
+'''
+TC: O(n*3^n)
+SC: O(n)
+'''
 class Solution:
     def __init__(self):
         self.res = list()

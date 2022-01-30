@@ -1,5 +1,5 @@
 '''
-TC: O(2^n)
+TC: O(2^(m+n))
 SC: O(m + n) - take mins, and do not rest
 
 Intuition: backtracking
