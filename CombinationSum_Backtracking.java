@@ -1,28 +1,24 @@
-
 class Solution {
     List<List<Integer>> result;
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         result = new ArrayList<>();
-        helper(candidates, target, 0, 0, new ArrayList<>());
+        helper(candidates,0,new ArrayList<>(),target);
         return result;
     }
-
-    public void helper(int[] candidates, int target, int currSum, int index, List<Integer> path) {
-        if(currSum == target) {
-            result.add(path);
+private  void helper(int [] candidates, int index,List<Integer> path, int target ){
+        //base
+        if(target == 0){
+            result.add(new ArrayList<>(path));
             return;
         }
-
-        if(currSum > target || index == candidates.length) {
-            return;
-        }
-
-        for(int i = index; i < candidates.length; i++) {
-            List<Integer> temp = new ArrayList<>(path);
-            temp.add(candidates[i]);
-            currSum += candidates[i];
-            helper(candidates, target, currSum, i, temp);
-            currSum -= candidates[i];
+        if(target < 0 ||index == candidates.length) return;
+        for(int i = index;i<candidates.length;i++){
+            //action
+            path.add(candidates[i]);
+            //recurse
+            helper(candidates,i,path,target - candidates[i]);
+            //Backtrack
+            path.remove(path.size()-1);
         }
     }
-} 
+}
