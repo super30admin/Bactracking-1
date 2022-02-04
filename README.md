@@ -30,6 +30,29 @@ A solution set is:
   [3,5]
 ]
 
+# Time Complexity=Exponential
+# Space Complexity=O(n)
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        results = []
+        def backtrack(remain, comb, start):
+            if remain == 0:
+                results.append(list(comb))
+                return
+            elif remain < 0:
+                return
+            for i in range(start, len(candidates)):
+                comb.append(candidates[i])
+                backtrack(remain - candidates[i], comb, i)
+                comb.pop()
+        backtrack(target, [], 0)
+        return results
+
+
+# Time Complexity=Exponential
+# Space Complexity=O(n)
+
 ## Problem2
 Expression Add Operators(https://leetcode.com/problems/expression-add-operators/)
 
@@ -55,4 +78,29 @@ Example 5:
 
 Input: num = "3456237490", target = 9191
 Output: []
+class Solution:
+    def addOperators(self, num: 'str', target: 'int') -> 'List[str]':
 
+        N = len(num)
+        answers = []
+        def recurse(index, prev_operand, current_operand, value, string):
+            if index == N:
+                if value == target and current_operand == 0:
+                    answers.append("".join(string[1:]))
+                return
+            current_operand = current_operand*10 + int(num[index])
+            str_op = str(current_operand)
+            if current_operand > 0:
+                recurse(index + 1, prev_operand, current_operand, value, string)
+            string.append('+'); string.append(str_op)
+            recurse(index + 1, current_operand, 0, value + current_operand, string)
+            string.pop();string.pop()
+            if string:
+                string.append('-'); string.append(str_op)
+                recurse(index + 1, -current_operand, 0, value - current_operand, string)
+                string.pop();string.pop()
+                string.append('*'); string.append(str_op)
+                recurse(index + 1, current_operand * prev_operand, 0, value - prev_operand + (current_operand * prev_operand), string)
+                string.pop();string.pop()
+        recurse(0, 0, 0, 0, [])    
+        return answers
