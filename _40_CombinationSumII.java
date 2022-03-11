@@ -6,12 +6,12 @@
 
 // Your code here along with comments explaining your approach
 // start from index and leep track of sum so far if sum is greater than target then Backtrack
-
+// to remove duplicates if two elements are same the return and index is not at starting index
 class Solution {
-
     List<List<Integer>> res;
 
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
         res = new ArrayList<>();
         combinationSum(candidates, target, new ArrayList<>(), 0, 0);
         return res;
@@ -29,11 +29,18 @@ class Solution {
         }
 
         for(int i = currIndex; i<candidates.length; i++){
+
+
+            if(i != currIndex && candidates[i] == candidates[i-1] ) continue;
+
+
             currSum += candidates[i];
             currPath.add(candidates[i]);
-            combinationSum(candidates, target, currPath, currSum, i);
+            combinationSum(candidates, target, currPath, currSum, i+1);
             currSum -= candidates[i];
             currPath.remove(currPath.size()-1);
+
+
         }
 
     }
