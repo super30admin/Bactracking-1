@@ -1,8 +1,8 @@
 
-// Time Complexity : o(2^n)*n where n is length of string as at eevry step we have two choices to choose or not
-// Space Complexity : o(n) length of recursive stack
-// Did this code successfully run on Leetcode : No
-// Any problem you faced while coding this : Time Limit Exceeded for larger inputs
+// Time Complexity : o(2^(n/min(candidate[i])))*n where n is length of string as at eevry step we have two choices to choose or not
+// Space Complexity : o(n/min(candidate[i])) length of recursive stack
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No 
 
 // Your code here along with comments explaining your approach
 // start from index and leep track of sum so far if sum is greater than target then Backtrack

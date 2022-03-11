@@ -120,8 +120,8 @@ class Solution {
 
 // Time Complexity : o(2^n-1)*n where n is length of string
 // Space Complexity : o(n) length of recursive stack
-// Did this code successfully run on Leetcode : No
-// Any problem you faced while coding this : Time Limit Exceeded for larger inputs
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
 
 // Your code here along with comments explaining your approach
 //Intution : Calculate expression on the fly
