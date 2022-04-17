@@ -1,4 +1,4 @@
-// Time Complexity : O(T/m+n) where T is taget, m is smallest candidate, n no. of candidates
+// Time Complexity : O(2^(T/m+n)) where T is taget, m is smallest candidate, n no. of candidates
 // Space Complexity : O(T/m+n)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
