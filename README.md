@@ -56,3 +56,4 @@ Example 5:
 Input: num = "3456237490", target = 9191
 Output: []
 
+[Solution](https://youtu.be/3KJR4GuXqno)
