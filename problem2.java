@@ -1,22 +1,42 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class subset1{
-    List<List<Integer>> result;
-    public List<List<Integer>> subsets(int[] nums){
+class expressionAddOperators{
+    List<String> result;
+    public List<String> addOperators(String num, int target) {
         result = new ArrayList<>();
-        if(nums == null || nums.length == 0) return result;
+        if(num == null || num.length() == 0) return result;
 
-        result.add(new ArrayList<>());
-        for(int i = 0; i < nums.length; i++){
-            int size = result.size();
-            for(int j =0; j < size; j++){
-                List<Integer> newList = new ArrayList<>(result.get(j));
-                newList.add(nums[i]);
-                result.add(newList);
-            }
-        }
-
+        helper(num, target, 0, 0, 0, "");
         return result;
     }
+
+    private void helper(String num, int target, long cal, long tail, int index, String path){
+        if(index == num.length()){
+            if(cal == target){
+                result.add(path);
+            }
+            return;
+        }
+
+
+        for(int i = index; i < num.length();i++){
+            if(i != index && num.charAt(index) == '0') continue;
+            long curr = Long.parseLong(num.substring(index, i +1));
+            if(index == 0){
+                helper(num, target, curr, curr, i + 1, path + curr);
+            }
+            else{
+                // +
+                helper(num, target, cal + curr, curr, i + 1, path + "+" + curr);
+                // -
+                helper(num, target, cal - curr, -curr, i + 1, path + "-" + curr);
+                //*
+                helper(num, target, (cal - tail) + (tail * curr), tail * curr, i + 1, path + "*" + curr);
+            }
+        }
+    }
 }
+
+//time complexity O(2^n)
+//space complexity O(2^n)
