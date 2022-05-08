@@ -73,3 +73,42 @@ class Solution {
         }
     }
 }
+
+/**
+Approach 3: For loop based recursion and sorting - Faster according to leetcode
+TC: O(exponential)
+SC: depends on height of the tree -> target / min(ele) + 1
+*/
+class Solution {
+    List<List<Integer>> result = null;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result = new ArrayList<>();
+        
+        if (candidates == null || candidates.length == 0) {
+            return result;
+        }
+        Arrays.sort(candidates);
+        combinationSum(candidates, new ArrayList<>(), 0, 0, target);
+        return result;
+    }
+    
+    private void combinationSum(int[] candidates, List<Integer> curCombination, int index, int curSum, int target) {
+        // Don't have to check for index going out of bounds because the for loop below ensures that won't happen
+        if (curSum > target) {
+            return;
+        }
+        
+        if (curSum == target) {
+            result.add(new ArrayList<>(curCombination));
+            return;
+        }
+        
+        for (int i = index; i < candidates.length; ++i) {
+            if (curSum + candidates[i] > target)
+                return;
+            curCombination.add(candidates[i]);
+            combinationSum(candidates, curCombination, i, curSum + candidates[i], target);
+            curCombination.remove(curCombination.size() - 1);
+        }
+    }
+}
