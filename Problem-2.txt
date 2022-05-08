@@ -1,0 +1,100 @@
+//https://leetcode.com/problems/expression-add-operators/
+//time and space - exponential 
+//recusrion
+class Solution {
+    List<String> result;
+    public List<String> addOperators(String num, int target) {
+        result = new ArrayList<>();
+        if(num == null || num.length() == 0) return result;
+        
+        helper(num,target,0,0,0,"");
+        return result;
+        
+    }
+    
+    private void helper(String num, int target , long calc , long tail , int index,String path)
+    {
+        //base
+        if(index == num.length()){
+            if(calc == target){
+                result.add(path);
+            }
+            return;
+        }
+        
+        //logic
+        for(int i =index ;i<num.length();i++){
+            if(i != index && num.charAt(index) == '0') continue;
+            long curr = Long.parseLong(num.substring(index , i+1));
+            if(index == 0){
+                helper(num,target,curr,curr, i + 1 , path + curr);
+            }
+            else{
+                // + recurse
+                helper(num, target , calc + curr, curr, i + 1, path + "+" + curr);
+                
+                //-recurse
+                helper(num, target , calc - curr, -curr, i + 1, path + "-" + curr);
+                
+                //* recurse
+                helper(num, target ,(calc - tail) + (tail * curr), tail * curr, i + 1, path + "*" + curr);
+            }
+        }
+    }
+}
+
+//time and space - exponential 
+//backtrack
+class Solution {
+    List<String> result;
+    public List<String> addOperators(String num, int target) {
+        result = new ArrayList<>();
+        if(num == null || num.length() == 0) return result;
+        
+        backtrack(num,target,new StringBuilder(),0,0,0);
+        return result;
+        
+    }
+    
+    private void backtrack(String num, int target ,StringBuilder sb, long calc , long tail , int index)
+    {
+        //base
+        if(index == num.length()){
+            if(calc == target){
+                result.add(sb.toString());
+            }
+            return;
+        }
+        
+        //logic
+        for(int i =index ;i<num.length();i++){
+            if(i != index && num.charAt(index) == '0') continue;
+            long curr = Long.parseLong(num.substring(index , i+1));
+            int len = sb.length();
+            if(index == 0){
+                sb.append(curr);
+                backtrack(num,target,sb,curr,curr, i + 1);
+                sb.setLength(len);
+            }
+            else{
+                // + 
+                sb.append("+");
+                sb.append(curr);
+                backtrack(num, target , sb, calc + curr, curr, i + 1);
+                sb.setLength(len);
+                
+                //-
+                sb.append("-");
+                sb.append(curr);
+                backtrack(num, target ,sb, calc - curr, -curr, i + 1);
+                sb.setLength(len);
+                
+                //* 
+                sb.append("*");
+                sb.append(curr);
+                backtrack(num, target ,sb,(calc - tail) + (tail * curr), tail * curr, i + 1);
+                sb.setLength(len);
+            }
+        }
+    }
+}
