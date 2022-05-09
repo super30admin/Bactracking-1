@@ -1,3 +1,4 @@
+//tc: exponential ( 2 ^ n) sc: size of recursive stack
 class Solution {
     List<List<Integer>> result;
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
