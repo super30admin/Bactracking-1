@@ -38,5 +38,5 @@ class expressionAddOperators{
     }
 }
 
-//time complexity O(2^n)
-//space complexity O(2^n)
+//time complexity O(2^n) exponential as recursive functional
+//space complexity O(2^n) exponential as recursive call stack

@@ -27,5 +27,6 @@ class combinationSum1{
     }
 }
 
-//time complexity O(2^n)
-//space complexity O(recurse(target/min(candidates)))
+//time complexity O(2^n) exponential because of recursive function 
+//space complexity O(recurse(target/min(candidates))) we are choosing elements from array until we found the target 
+// so will add into recursive stack, so if we just choose min element that will have worst of recursive stack. 
