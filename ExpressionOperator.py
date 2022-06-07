@@ -1,3 +1,7 @@
+'''
+time complexity: O(exponential)
+space complexity: O(len(num))
+'''
 class Solution:
     def addOperators(self, num: str, target: int) -> List[str]:
         if(len(num)==0): return []

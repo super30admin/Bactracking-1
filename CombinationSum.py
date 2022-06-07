@@ -1,3 +1,7 @@
+'''
+time complexity: O(exponential)
+space complexity: O(exponential)
+'''
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         if(len(candidates)==0 or target==0): return []
