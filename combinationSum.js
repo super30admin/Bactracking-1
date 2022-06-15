@@ -9,7 +9,7 @@
  * @return {number[][]}
  */
 
-//Bruteforce 0-1 recursion solution
+//Backtrack 0-1 recursion solution (Creating a new list for path every time)
 let result;
 var helper = function(candidates, target, index, path){
     //base case
@@ -33,7 +33,7 @@ var combinationSum = function(candidates, target) {
     return result;
 };
 
-//Backtrack 0-1 recursion solution
+//Backtrack 0-1 recursion solution (Maintaing a single list for path and backtrack)
 /*
 let result;
 var helper = function(candidates, target, index, path){
