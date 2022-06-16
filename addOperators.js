@@ -17,26 +17,23 @@ var helper = function(num, index, calc, tail, path, target) {
         }
         return;
     }
-    
+     
     //logic
     for(let i = index; i < num.length; i++) {
-        //preceding zero
-        if(num.charAt(index) == '0' && index != i) continue; 
-        let curr = Number(num.substring(index, i+1));
+        if(num.charAt(index) === '0' && index !== i) continue;
+        let curr = parseInt(num.substring(index, i+1));
         if(index === 0) {
-            //action
-            helper(num, i + 1, curr, curr, path + curr, target)
+            helper(num, i+1, curr, curr, path+curr, target)
         } else {
             //+
-            helper(num, i + 1, calc + curr, curr, path + "+" + curr, target)
+            helper(num, i + 1, calc + curr, +curr, path + "+" + curr, target);
             //-
-            helper(num, i + 1, calc - curr, curr, path + "-" + curr, target)
+            helper(num, i + 1, calc - curr, -curr, path + "-" + curr, target);
             //*
-            helper(num, i + 1, calc - tail + tail * curr, tail * curr, path + "*" + curr, target)
-        }  
+            helper(num, i + 1, calc-tail+tail*curr, tail*curr, path + "*" + curr, target);
+        }
     }
-}
-
+ }
 var addOperators = function(num, target) {
     result = [];
     if(num === null || num.length === 0) return result;
