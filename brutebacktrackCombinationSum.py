@@ -1,5 +1,5 @@
 #Approach - Brute force with backtracking
-#Time complexity : O(n*2^(target/minimum elment in the list)) here n is number of elements i.e. we are creating new list
+#Time complexity : O(2^(target/minimum elment in the list))
 #Space complexity : O(log m base 2) where m is the depth of tree
 #Did this code successfully run on Leetcode : Yes
 #youtube : https://www.youtube.com/watch?v=ZcwpurxyIaQ&ab_channel=%7BS30%7D
