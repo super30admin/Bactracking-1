@@ -1,0 +1,178 @@
+Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
+
+The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.
+
+It is guaranteed that the number of unique combinations that sum up to target is less than 150 combinations for the given input.
+
+ 
+
+Example 1:
+
+Input: candidates = [2,3,6,7], target = 7
+Output: [[2,2,3],[7]]
+Explanation:
+2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
+7 is a candidate, and 7 = 7.
+These are the only two combinations.
+Example 2:
+
+Input: candidates = [2,3,5], target = 8
+Output: [[2,2,2,2],[2,3,3],[3,5]]
+Example 3:
+
+Input: candidates = [2], target = 1
+Output: []
+ 
+
+Constraints:
+
+1 <= candidates.length <= 30
+1 <= candidates[i] <= 200
+All elements of candidates are distinct.
+1 <= target <= 500
+
+--------------------------------------------
+
+Solution 1 - Exhaustive TC - O(2 ^ (m + n)) where m = length of candidates, n = target
+SC - O(2 ^ (m + n))
+
+class Solution {
+    List<List<Integer>> res;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        res = new ArrayList<>();
+        helper(candidates, target, 0, new ArrayList<>());
+        return res;
+    }
+    
+    public void helper(int[] candidates, int target, int index, List<Integer> result)
+    {
+        // base case
+        if(target == 0)
+        {
+            res.add(result);
+            return;
+        }
+            
+        if(target < 0 || index == candidates.length)
+            return;
+        
+        // choose
+        List<Integer> path = new ArrayList<>(result);
+        path.add(candidates[index]);
+        helper(candidates, target - candidates[index], index, path);
+        
+        // not choose
+        helper(candidates, target, index + 1, new ArrayList<>(result));
+    }
+}
+
+---------------------------------------
+
+Solution 2 - Backtracking 
+TC : O(2^(m+n))
+SC : O(m+n)
+
+class Solution {
+    List<List<Integer>> res;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        res = new ArrayList<>();
+        helper(candidates, target, 0, new ArrayList<>());
+        return res;
+    }
+    
+    public void helper(int[] candidates, int target, int index, List<Integer> result)
+    {
+        // base case
+        if(target == 0)
+        {
+            res.add(new ArrayList<>(result));  
+            return;
+        }
+        
+        if(target < 0 || index == candidates.length)
+        {
+            return;
+        }
+        
+        
+        // choose
+        result.add(candidates[index]);
+        helper(candidates, target - candidates[index], index, result);
+        result.remove(result.size() - 1);
+        
+        // not choose
+        helper(candidates, target, index + 1, result);
+    }
+}
+
+----------------------------------------------
+
+Solution 3 - for loop based 0/1 recursion - 
+TC - O()
+SC - O()
+
+class Solution {
+    List<List<Integer>> result;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result = new ArrayList<>();
+        helper(candidates, target, 0, new ArrayList<>());
+        return result;
+    }
+    
+    public void helper(int[] candidates, int target, int index, List<Integer> path)
+    {
+        // base case
+        if(target == 0)
+        {
+            result.add(path);
+            return;
+        }
+        
+        if(target < 0 || index == candidates.length)
+            return;
+        
+        //logic
+        for(int i = index; i < candidates.length; i++)
+        {
+            List<Integer> temp = new ArrayList<>(path);
+            temp.add(candidates[i]);
+            helper(candidates, target - candidates[i], i, temp);
+        }
+    }
+}
+
+-------------------------------------------------
+
+Solution 4 - for- based Backtraking - 
+TC - O()
+SC - O()
+
+class Solution {
+    List<List<Integer>> result;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result = new ArrayList<>();
+        helper(candidates, target, 0, new ArrayList<>());
+        return result;
+    }
+    
+    public void helper(int[] candidates, int target, int index, List<Integer> path)
+    {
+        // base case
+        if(target == 0)
+        {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+        
+        if(target < 0 || index == candidates.length)
+            return;
+        
+        //logic
+        for(int i = index; i < candidates.length; i++)
+        {
+            path.add(candidates[i]);
+            helper(candidates, target - candidates[i], i, path);
+            path.remove(path.size() - 1);
+        }
+    }
+}
