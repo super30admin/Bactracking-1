@@ -1,0 +1,51 @@
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        #timeComplexity:exponential,O(4^n)
+        #spaceComplexity:O(n)
+            index = 0;
+            result = [];
+            if candidates == None or len(candidates)==0:
+                return result;
+            def helper(candidates: List[int], target: int, index:int, path:List[int]):
+                if(target<0 or index==len(candidates)):
+                    return;
+                if(target == 0):
+                    result.append(path)
+                    return result;
+                path.append(candidates[index]);
+                helper(candidates, target-candidates[index], index, list(path));
+                path.pop()
+                helper(candidates, target, index+1, list(path));
+            helper(candidates, target, 0, [] );
+            return result;
+        
+ class Solution:
+    def addOperators(self, num: str, target: int) -> List[str]:
+        #timeComplexity:exponential,O(4^n)
+        #spaceComplexity:O(n)
+        index = 0;
+        result = [];
+        
+        
+        if num == None or len(num)==0:
+            return result;
+        def helper(num: str, target: int, index:int, path:str, calc:int, tail:int):
+            
+            #base
+            if index == len(num):
+                if calc == target:
+                    result.append(path);
+                
+            #logic
+            for i in range(index, len(num)):
+                if (index!= i and num[index]=='0'):
+                    continue;
+                curr = int(num[index:i+1]);
+                if index == 0:
+                    helper(num,target,i+1, path+str(curr),curr,curr);
+                else:
+                    helper(num,target,i+1,path + '+' + str(curr), calc+curr,curr);
+                    helper(num,target,i+1,path + '-' + str(curr), int(calc)-int(curr),-curr);
+                    helper(num,target,i+1,path+'*'+str(curr),calc-tail+tail*curr,tail*curr);
+        helper(num, target, 0 , "", 0 ,0);
+        return result;
