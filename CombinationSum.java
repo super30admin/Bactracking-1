@@ -1,3 +1,43 @@
+
+//For Loop Base Recursion by using backtrack
+class Solution {
+    List<List<Integer>> result; // Global list [[],[]]
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result = new ArrayList<>();
+        if(candidates == null){
+            return result;
+        }
+        helper(candidates, 0, target, new ArrayList<>());
+        return result;
+    }
+      private void helper(int[] candidates, int pivot, int amount, List<Integer> path){
+        //base
+        if(amount<0) return;
+        if(amount == 0){
+            result.add(new ArrayList(path));
+            return;
+        }
+          
+        for(int i=pivot; i<candidates.length; i++){ //why from pivot
+            //action
+            
+            path.add(candidates[i]);
+            
+            //recurse
+            
+            helper(candidates, i, amount-candidates[i], path); //new pivot
+            
+            //backtrack
+            
+            path.remove(path.size()-1);
+            
+        }
+        
+    }
+}
+
+
+
 //For Loop Base Recursion
 class Solution {
     List<List<Integer>> result; // Global list [[],[]]
