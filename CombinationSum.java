@@ -1,3 +1,32 @@
+//For Loop Base Recursion
+class Solution {
+    List<List<Integer>> result; // Global list [[],[]]
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result = new ArrayList<>();
+        if(candidates == null){
+            return result;
+        }
+        helper(candidates, 0, target, new ArrayList<>());
+        return result;
+    }
+      private void helper(int[] candidates, int pivot, int amount, List<Integer> path){
+        //base
+        if(amount<0) return;
+        if(amount == 0){
+            result.add(path);
+            return;
+        }
+          
+        for(int i=pivot; i<candidates.length; i++){
+            List<Integer> temp = new ArrayList<>(path);
+            temp.add(candidates[i]);
+            helper(candidates, i, amount-candidates[i], temp);
+            
+        }
+        
+    }
+}
+
 
 
 
