@@ -1,0 +1,18 @@
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        r, c, N = [], [], len(candidates)
+        def dfs(c,s ,target):
+            if target == 0:
+                r.append(c.copy())
+                return;
+            if target < 0: return
+            for i in range(s, N):
+                c.append(candidates[i])
+                dfs(c,i, target - candidates[i])
+                c.pop()
+        dfs(c, 0, target)
+        return r
+    
+# Time Complexity: O(2^n)
+# Space Complexity: O(n)
+# Successfully implemented on Leetcode
