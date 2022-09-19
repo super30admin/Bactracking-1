@@ -1,0 +1,24 @@
+class Solution:
+    def addOperators(self, num: str, target: int) -> List[str]:
+        def a(idx, p,c,v,s):
+            if idx == n:
+                if v == target and c == 0:
+                    self.result.append(s)
+                return
+            c = c * 10 + int(num[idx])
+            if c > 0:
+                a(idx+1, p,c,v,s)
+            if not s:
+                a(idx+1, c, 0, v+c, str(c))
+            else:
+                a(idx+1, c, 0, v+c, s+"+"+str(c))
+                a(idx+1, -c, 0, v-c, s+"-"+str(c))
+                a(idx+1, p*c, 0, v-p+p*c, s+"*"+str(c))
+        n = len(num)
+        self.result = []
+        a(0,0,0,0,"")
+        return self.result
+    
+# Time Complexity: O(4^n)
+# Space Complexity: O(n)
+# Successfully implemented on Leetcode
