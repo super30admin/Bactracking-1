@@ -1,5 +1,5 @@
-// Time Complexity : 
-// Space Complexity : 
+// Time Complexity :l*(4^l)
+// Space Complexity : O(l) - length of the string
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this :No
 
