@@ -1,9 +1,9 @@
-// Time Complexity : O(1) // For each operation
-// Space Complexity : O(1)
+// Time Complexity : O(n^4) // For each operation
+// Space Complexity : O(n)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : Nothing as such
 
-class Problem2 {
+class Solution {
 public List<String> addOperators(String num, int target) {
 	List<String> result = new ArrayList<String>();
 	addOperators(num, target, 0, result, "", 0, 0);
