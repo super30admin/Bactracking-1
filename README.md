@@ -1,7 +1,7 @@
 # Bactracking-1
 
+## Problem1
 
-## Problem1 
 Combination Sum (https://leetcode.com/problems/combination-sum/)
 
 Given a set of candidate numbers (candidates) (without duplicates) and a target number (target), find all unique combinations in candidates where the candidate numbers sums to target.
@@ -17,28 +17,29 @@ Example 1:
 Input: candidates = [2,3,6,7], target = 7,
 A solution set is:
 [
-  [7],
-  [2,2,3]
+[7],
+[2,2,3]
 ]
 Example 2:
 
 Input: candidates = [2,3,5], target = 8,
 A solution set is:
 [
-  [2,2,2,2],
-  [2,3,3],
-  [3,5]
+[2,2,2,2],
+[2,3,3],
+[3,5]
 ]
 
 ## Problem2
+
 Expression Add Operators(https://leetcode.com/problems/expression-add-operators/)
 
-Given a string that contains only digits 0-9 and a target value, return all possibilities to add binary operators (not unary) +, -, or * between the digits so they evaluate to the target value.
+Given a string that contains only digits 0-9 and a target value, return all possibilities to add binary operators (not unary) +, -, or \* between the digits so they evaluate to the target value.
 
 Example 1:
 
 Input: num = "123", target = 6
-Output: ["1+2+3", "1*2*3"] 
+Output: ["1+2+3", "1*2*3"]
 Example 2:
 
 Input: num = "232", target = 8
@@ -55,4 +56,3 @@ Example 5:
 
 Input: num = "3456237490", target = 9191
 Output: []
-
