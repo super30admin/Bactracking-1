@@ -1,5 +1,5 @@
-//Timecomplexity
-//SpaceComplexity
+//Timecomplexity.  4^n
+//SpaceComplexity. O(n)
 
 
 class Solution {
