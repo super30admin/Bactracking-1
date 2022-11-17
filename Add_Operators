@@ -1,0 +1,57 @@
+//Timecomplexity
+//SpaceComplexity
+
+
+class Solution {
+    List<String> result;
+    public List<String> addOperators(String num, int target) {
+        result = new ArrayList<>();
+
+
+        helper(num, target,0,0, new StringBuilder(), 0);
+        return result;
+    }
+
+    private void helper(String num, int target, long cal, long tail, StringBuilder path, int pivot){
+
+
+        //base
+        if(pivot == num.length()){
+            if(cal == target){
+                result.add(path.toString());
+            }
+            return;
+        }
+
+        //logic
+        
+
+        for(int i = pivot; i < num.length(); i++){
+
+            if(num.charAt(pivot) == '0' && i != pivot)continue;
+            long curr = Long.parseLong(num.substring(pivot, i+1));
+            int le = path.length();
+            if(pivot == 0){
+                    path.append(curr);
+                    helper(num, target, curr, curr, path ,i+1);
+                    path.setLength(le);
+            }else{
+                    //+
+                    path.append('+');
+                    path.append(curr);
+                    helper(num, target, cal+curr, +curr, path,i+1);
+                    path.setLength(le);
+                    //-
+                     path.append('-');
+                     path.append(curr);
+                    helper(num, target, cal - curr, -curr, path ,i+1);
+                    path.setLength(le);
+                    //*
+                     path.append('*');
+                     path.append(curr);
+                    helper(num, target, cal - tail + curr * tail, curr * tail, path,i+1);
+                    path.setLength(le);
+            }
+        }
+    }
+}
