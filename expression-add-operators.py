@@ -1,5 +1,5 @@
 #For loop based recursion preferable coz of string operations and the fact that we need to use all the characters in the string
-#TC: O(2^n)
+#TC: O(n * 4^n)
 #SC: O(n)
 
 class Solution:
