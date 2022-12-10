@@ -1,5 +1,6 @@
 # 0-1 backtracking / can also be done via for loop based recursion/backtracking
-#TC: 
+#TC: O(2^n)
+#SC: O(n)
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         
