@@ -1,4 +1,4 @@
-#Time complexity: O(4^n)
+#Time complexity: O(n * 4^n)
 #Space complexity: O(h)
 
 #Accepted on Leetcode
