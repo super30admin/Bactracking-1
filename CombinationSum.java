@@ -23,6 +23,9 @@
 //         helper(candidates, i, li, target-candidates[i]);
 //     }
 // }
+
+//Time Complexity: O(2^n)
+//Space Complexity: O(n)
 class Solution {
     List<List<Integer>> result;
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
