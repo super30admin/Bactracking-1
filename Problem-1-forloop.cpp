@@ -1,4 +1,7 @@
-class Solution {
+// Time Complexity: O(m*n), n is total no. of elements in candidates list & m is target.
+// Space complexity: O(m+n)class Solution
+
+class Solution{
 public:
     vector<vector<int>> res;
     void helper(vector<int>& candidates, int amount, int pivot, vector<int>& path){
