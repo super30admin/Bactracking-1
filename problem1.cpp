@@ -1,6 +1,6 @@
 // Time Complexity : O(2^n)
 // Space Complexity : O(n) for recurrsive stack.
-// Did this code successfully run on Leetcode :
+// Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this :
 
 
