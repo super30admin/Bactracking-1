@@ -1,6 +1,7 @@
 //using for loop recurssion
 //take a pivot [2(pivot),3,6,7] and check all posibilities(for loop on 3,6,7) for it. Add the path in result wherever amount becomes zero
 //once this path is explored, change pivot to next number
+//in for loop we are starting from pivot bcz starting from zero will give all permutations which will be alrdy covered in below case
 //TC: 2^mn/2 = 2^(mn-1)
 //SC: 2^mn
 
