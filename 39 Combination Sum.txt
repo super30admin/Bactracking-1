@@ -1,0 +1,89 @@
+//39. Combination Sum
+
+//Backtrack using for loop
+class Solution {
+    List<List<Integer>>result=new ArrayList<>();
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        helper(candidates,0,target,new ArrayList<>(),result);
+        return result;
+    }
+    private void helper(int[] candidates, int pivot, int target,List<Integer>path, List<List<Integer>>result){
+     //base
+    if(target<0)return;
+    if(target==0){
+        result.add(new ArrayList<>(path));
+    }
+     //logic
+     for(int i=pivot;i<candidates.length;i++){
+         //action
+         path.add(candidates[i]);
+         //recurse
+         helper(candidates,i,target-candidates[i],path,result);
+         //backtrack
+         path.remove(path.size()-1);
+
+     }
+    
+    }
+}
+
+
+
+//Backtrack
+// class Solution {
+//     List<List<Integer>>result=new ArrayList<>();
+//     public List<List<Integer>> combinationSum(int[] candidates, int target) {
+//         helper(candidates,0,target,new ArrayList<>());
+//        return result;
+        
+//     }
+//     private void helper(int[] candidates, int idx, int target,List<Integer>path){
+//      //base
+//     if(idx==candidates.length || target <0){
+//         return;
+//     }
+//     if(target==0){
+//         result.add(new ArrayList<>(path));
+//         return;
+//     }
+//         //logic
+//          //not choose
+//         helper(candidates,idx+1,target,path);
+//         //choose
+//         //action
+//         path.add(candidates[idx]);
+//         //recurse
+//         helper(candidates,idx,target-candidates[idx],path);
+//        //backtrack
+//        path.remove(path.size()-1);
+//     }
+// }
+
+
+// class Solution {
+//     List<List<Integer>>result=new ArrayList<>();
+//     public List<List<Integer>> combinationSum(int[] candidates, int target) {
+//         helper(candidates,0,target,new ArrayList<>());
+//        return result;
+        
+//     }
+//     private void helper(int[] candidates, int idx, int target,List<Integer>path){
+//      //base
+//     if(idx==candidates.length || target <0){
+//         return;
+//     }
+//     if(target==0){
+//         result.add(path);
+//         return;
+//     }
+//         //logic
+//          //not choose
+//         helper(candidates,idx+1,target,new ArrayList<>(path));
+//         //choose
+//         //action
+//         path.add(candidates[idx]);
+//         //recurse
+//         helper(candidates,idx,target-candidates[idx],new ArrayList<>(path));
+       
+//     }
+// }
