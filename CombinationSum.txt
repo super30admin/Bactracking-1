@@ -1,0 +1,32 @@
+/**
+Time Complexity - 2 ^ (m+n) where m=target n = length of input
+Space complexity - O(m+n)
+ */
+class Solution {
+    List<List<Integer>> results;
+
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        results = new ArrayList<>();
+        helper(candidates, 0, target, new ArrayList<>());
+        return results;
+    }
+
+    private void helper(int[] candidates, int index, int target, List<Integer> path) {
+        // base case
+
+        if (index == candidates.length || target <0) {
+            return;
+        }
+
+        if (target == 0) {
+            results.add(path);
+            return;
+        }
+        // logic
+        // do not choose the number
+        helper(candidates, index+1, target, new ArrayList<>(path));
+        // choose the number
+        path.add(candidates[index]);
+        helper(candidates, index, target - candidates[index], new ArrayList<>(path));
+    }
+}
