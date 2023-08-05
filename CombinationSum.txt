@@ -19,14 +19,16 @@ class Solution {
         }
 
         if (target == 0) {
-            results.add(path);
+            results.add(new ArrayList<>(path));
             return;
         }
         // logic
-        // do not choose the number
-        helper(candidates, index+1, target, new ArrayList<>(path));
         // choose the number
         path.add(candidates[index]);
-        helper(candidates, index, target - candidates[index], new ArrayList<>(path));
+        helper(candidates, index, target - candidates[index], path);
+        //backtrack
+        path.remove(path.size() -1);
+         // do not choose the number
+        helper(candidates, index+1, target, path);
     }
 }
