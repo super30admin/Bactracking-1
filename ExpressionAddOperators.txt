@@ -1,0 +1,43 @@
+/**
+Time Complexity - O(4^N)
+Space Complexity - O(N)
+ */
+class Solution {
+   List<String> results;
+
+    public List<String> addOperators(String num, int target) {
+        this.results = new ArrayList<>();
+        helper(num, target, 0, 0, 0, "");
+        return results;
+    }
+
+    private void helper(String num, int target, int pivot, long resPrev, long prev, String path) {
+            // base case
+            if (pivot == num.length()) {
+                if (target == resPrev) {
+                    results.add(path);
+                    return;
+                }
+            }
+
+            // logic
+            for(int i=pivot; i<num.length(); i++) {
+                if (i > pivot && num.charAt(pivot) == '0') {
+                    break;
+                }
+                long curr = Long.parseLong(num.substring(pivot, i+1));
+                if (pivot == 0) {
+                    helper(num, target, i+1, curr, curr, path + curr);
+                } else {
+
+                    // +
+                    helper(num, target, i+1,resPrev + curr, curr, path + "+" + curr);
+                    // -
+                    helper(num, target, i+1, resPrev -curr, -curr, path + "-" + curr);
+                    // *
+                    helper(num, target, i+1,resPrev - prev + prev* curr, prev*curr, path + "*" + curr);
+                }
+            }
+    }
+
+}
