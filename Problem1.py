@@ -1,4 +1,6 @@
 class Solution:
+    # Time Complexity: O(2^(n+m))
+    # Space Complexity: O(n)
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         self.result = []
         self.helper(candidates, 0, target, [])
