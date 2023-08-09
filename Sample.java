@@ -1,6 +1,6 @@
 //Problem 1: Combination Sum
-// Time Complexity : O(n)
-// Space Complexity : O(n)
+// Time Complexity : O(m+n)
+// Space Complexity : O(m+n)
 // Did this code successfully run on Leetcode :yes
 // Any problem you faced while coding this :no
 
@@ -64,4 +64,110 @@ class Solution {
             //choose
         }
     }
+}
+
+//Problem 1: Expression Add Operators
+// Time Complexity : O(4^n)
+// Space Complexity : O(4n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+
+// Your code here along with comments explaining your approach
+//Approach-> there are 4 operators in total, make recursive call to each operator with new string always and check if result is equal to target
+// BACKTRACKING: maintain a single Stringbuilder, backtrack to the original string after a recursive call is completed
+class Solution {
+    //TC: 4^n 
+    //SC: 4n
+
+    // List<String> res;
+    // public List<String> addOperators(String num, int target) {
+    //     this.res=new ArrayList<>();
+    //     helper(num, 0, 0, 0, target, "");
+    //     return res;
+    // }
+
+    // private void helper(String num, int pivot, long calc, long tail, int target, String path){
+    //     //base
+    //     if(pivot==num.length()){ //reached end
+    //         if(target==calc){
+    //             res.add(path);
+    //         }
+    //         return;
+    //     }
+
+    //     //logic
+    //     for(int i=pivot;i<num.length();i++){
+    //         //action
+    //         //placeholder proceeding zero
+                // if(num.charAt(pivot)=='0' && i!=pivot) continue;
+    //         long cur=Long.parseLong(num.substring(pivot,i+1));
+            
+    //         //make combinations
+    //         if(pivot==0){
+    //             helper(num,i+1, cur,cur, target,  path+cur);
+    //         }else{
+    //             //+
+    //             helper(num,i+1, calc+cur, +cur, target, path+"+"+cur);
+    //             //-
+    //             helper(num,i+1, calc-cur, -cur, target, path+"-"+cur);
+    //             //*
+    //             helper(num,i+1, calc-tail + tail*cur, tail*cur, target, path+"*"+cur);
+    //         }
+    //     }
+    // }
+
+    //Solution with single StringBuilder //backtracking
+    List<String> res;
+    public List<String> addOperators(String num, int target) {
+        this.res=new ArrayList<>();
+        helper(num, 0, 0, 0, target, new StringBuilder());
+        return res;
+    }
+
+    private void helper(String num, int pivot, long calc, long tail, int target, StringBuilder path){
+        //base
+        if(pivot==num.length()){ //reached end
+            if(target==calc){
+                res.add(path.toString());
+            }
+            return;
+        }
+
+        //logic
+        for(int i=pivot;i<num.length();i++){
+            int length=path.length();
+            //action
+            //placeholder proceeding zero
+            if(num.charAt(pivot)=='0' && i!=pivot) continue;
+            long cur=Long.parseLong(num.substring(pivot,i+1));
+            
+            //make combinations
+            if(pivot==0){
+                path.append(cur);
+                helper(num,i+1, cur,cur, target,  path);
+                path.setLength(length);
+            }else{
+                //+
+                //action
+                path.append("+");
+                path.append(cur);
+                helper(num,i+1, calc+cur, +cur, target, path);
+                path.setLength(length);
+
+                //-
+                path.append("-");
+                path.append(cur);
+                helper(num,i+1, calc-cur, -cur, target, path);
+                path.setLength(length);
+
+                //*
+                path.append("*");
+                path.append(cur);
+                helper(num,i+1, calc-tail + tail*cur, tail*cur, target, path);
+                path.setLength(length);
+            }
+        }
+    }
+
 }
