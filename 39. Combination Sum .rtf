@@ -1,0 +1,35 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red25\green25\blue25;}
+{\*\expandedcolortbl;;\cssrgb\c12941\c12941\c12941;}
+\margl1440\margr1440\vieww28600\viewh15060\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+class Solution:\
+\
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:\
+        \
+        result = []\
+        \
+        def helper(candidates, target, pivot, path):\
+            \
+        #base condition\
+            if target == 0:\
+                li = list(path)\
+                result.append(li)\
+                return\
+            \
+            if target < 0 or pivot == len(candidates):\
+                return\
+\
+            #logic\
+            for i in range(pivot, len(candidates)):\
+                path.append(candidates[i])\
+                helper(candidates, target - candidates[i], i, path)\
+                path.pop()\
+        helper(candidates, target, 0, [])\
+        return result\
+            \
+        }
