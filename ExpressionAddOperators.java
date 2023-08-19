@@ -3,6 +3,24 @@
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
 
+
+/*
+
+    Approach:
+
+    We use a recursive approach to explore all possible combinations of operators and numbers.
+
+    When code reaches the end of the string, it checks if the accumulated value plus the previous
+    value equals the target. If it does, the current expression is added to the result list.
+
+    For each position in the string, it considers three possibilities: adding '+', '-', or '*'
+    between the current and next numbers and recursively explores each option, updating the value
+    and previous accordingly.
+
+ */
+
+
+
 import java.util.*;
 
 class ExpressionAddOperators {

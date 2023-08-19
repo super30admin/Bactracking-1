@@ -4,6 +4,25 @@
 // Any problem you faced while coding this : No
 
 
+/*
+
+    Approach:
+
+    It explores all possible combinations of numbers from the candidates array that
+    sum up to the target, starting from an empty current combination and adding candidates
+    while reducing the target sum.
+
+    When the target becomes 0, a valid combination is found, so it's added to the result.
+    To ensure distinct combinations, a copy of the current combination is added to the result.
+
+    The code iterates through the candidates, recursively explores possibilities, and backtracks
+    by removing the last candidate when needed, ensuring that it explores all valid combinations
+    to find all solutions.
+
+
+ */
+
+
 import java.util.*;
 
 class CombinationSum {
