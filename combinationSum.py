@@ -19,7 +19,7 @@ class Solution(object):
                 return
 
             #action
-            #not choose
+            #do not choose
             helper(candidates, index +1, path, remainingTarget)
 
             #choose
