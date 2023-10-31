@@ -30,3 +30,32 @@ private:
         }
     }   
 };
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//01 based recursion
+class Solution {
+vector<vector<int>> result;    
+public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        helper(candidates, target, 0, vector<int>());
+        return result;
+    }
+private:
+    void helper(vector<int>& candidates, int target, int index, vector<int> path){
+        //base case:
+        if(target<0 || index == candidates.size())return;
+        if(target==0){
+            result.push_back((path));
+            return;
+        }
+        //logic
+        //action --> choose (1 case) or no choose (0 case)
+        //recurse
+        //0 case (not choosen)
+        helper(candidates, target, index+1, path);
+        path.push_back(candidates[index]);
+        //1 case (choose)
+        helper(candidates, target-candidates[index], index, path);
+        //backtrack
+        path.pop_back();
+    }    
+};
