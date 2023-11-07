@@ -1,0 +1,21 @@
+#time complexity: O(n*4^n)
+#space complexity: O(4^n)
+#did it run on leetcode: yes
+import re
+class Solution:
+    def addOperators(self, num: str, target: int) -> List[str]:
+        operators = ['+', '-', '*']
+        n = len(num)
+        ans = []
+        def recursive(sp, curr:str):
+            pattern = r'\b0\d+\b'
+            if sp == len(curr)-1:
+                if (not re.search(pattern,curr)) and eval(curr)==target:
+                    ans.append(curr)
+                return
+            recursive(sp+1,curr)
+            recursive(sp+2, curr[:sp+1]+"*"+curr[sp+1:])
+            recursive(sp+2, curr[:sp+1]+"+"+curr[sp+1:])
+            recursive(sp+2, curr[:sp+1]+"-"+curr[sp+1:])
+        recursive(0,num)
+        return ans
