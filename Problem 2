@@ -1,0 +1,34 @@
+# Expression Add Operators
+
+#Time Complexity: O(3^N)
+#Space Complexity: O(N)
+
+class Solution:
+    def addOperators(self, num: str, target: int) -> List[str]:
+        def backtrack(index, path, value, prev_operand):
+            if index == len(num):
+                if value == target:
+                    results.append(path)
+                return
+
+            for i in range(index, len(num)):
+                if i != index and num[index] == '0':
+                    break
+
+                curr_str = num[index:i + 1]
+                curr_num = int(curr_str)
+
+                if index == 0:
+                    backtrack(i + 1, curr_str, curr_num, curr_num)
+                else:
+                    backtrack(i + 1, path + "+" + curr_str, value + curr_num, curr_num)
+                    backtrack(i + 1, path + "-" + curr_str, value - curr_num, -curr_num)
+                    backtrack(i + 1, path + "*" + curr_str, value - prev_operand + prev_operand * curr_num, prev_operand * curr_num)
+
+        results = []
+        backtrack(0, "", 0, 0)
+        return results
+
+
+
+        
